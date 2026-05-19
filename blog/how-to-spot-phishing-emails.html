@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>How to Spot a Phishing Email Before You Click | Trusty Password</title>
+<meta name="description" content="Phishing emails are the entry point for the majority of credential theft. This guide covers the specific red flags that distinguish phishing from legitimate email, with real-world examples.">
+<link rel="canonical" href="https://trustypassword.com/blog/how-to-spot-phishing-emails.html">
+<meta property="og:title" content="How to Spot a Phishing Email Before You Click"><meta property="og:description" content="Phishing emails are the entry point for the majority of credential theft. This guide covers the specific red flags that distinguish phishing from legitimate email, with real-world examples.">
+<meta property="og:image" content="https://trustypassword.com/assets/img/og-how-to-spot-phishing-emails.jpg">
+<meta property="og:type" content="article"><meta property="og:url" content="https://trustypassword.com/blog/how-to-spot-phishing-emails.html">
+<meta property="article:published_time" content="2026-05-07">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='8' fill='%23f8fafc'/><text x='4' y='28' font-size='22'>&#x1F6E1;&#xFE0F;</text></svg>"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to Spot a Phishing Email Before You Click", "datePublished": "2026-05-07", "dateModified": "2026-05-07", "author": {"@type": "Person", "name": "Sophie Laurent", "jobTitle": "Cybersecurity Awareness Trainer"}, "publisher": {"@type": "Organization", "name": "Trusty Password", "url": "https://trustypassword.com/"}, "description": "Phishing emails are the entry point for the majority of credential theft. This guide covers the specific red flags that distinguish phishing from legitimate email, with real-world examples.", "url": "https://trustypassword.com/blog/how-to-spot-phishing-emails.html", "articleSection": "Phishing Awareness", "keywords": "phishing, email security, social engineering, NCSC, credential theft", "wordCount": "1400"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://trustypassword.com/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://trustypassword.com/blog.html"}, {"@type": "ListItem", "position": 3, "name": "How to Spot a Phishing Email Before You Click", "item": "https://trustypassword.com/blog/how-to-spot-phishing-emails.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are the most reliable signs of a phishing email?","acceptedAnswer":{"@type":"Answer","text":"The most reliable indicators are: sender address mismatch (the display name says "Amazon" but the actual email address is from a random domain), urgent or threatening language designed to provoke immediate action, requests to click a link rather than go directly to a website, generic greetings ("Dear Customer" rather than your name), and subtle typos or odd phrasing in text that is otherwise professionally formatted."}},{"@type":"Question","name":"Can a phishing email come from a legitimate-looking address?","acceptedAnswer":{"@type":"Answer","text":"Yes — this is called email spoofing. Attackers can forge the "From" display name and sometimes the visible email address. Check the actual sending domain by hovering over the sender address or viewing the full email headers. Legitimate banks and service providers never send from free email domains (Gmail, Yahoo) or domains that differ from their website. DMARC, DKIM, and SPF records help authenticate emails but are not universally implemented."}},{"@type":"Question","name":"How do I check if a link in an email is safe before clicking?","acceptedAnswer":{"@type":"Answer","text":"Hover over any link without clicking — the actual destination URL will appear in your browser's status bar or as a tooltip. Look for: domain mismatch (link says Amazon but destination is amazon.login-secure.com), URL shorteners (bit.ly, tinyurl — these hide the destination), misspelt domains (paypa1.com, gogle.com), or HTTP rather than HTTPS. If in doubt, navigate directly to the site by typing the address rather than clicking the link."}},{"@type":"Question","name":"What is spear phishing and how is it different from regular phishing?","acceptedAnswer":{"@type":"Answer","text":"Regular phishing is mass-sent — one template sent to millions hoping some recipients have the relevant account. Spear phishing is targeted — the attacker researches you specifically (LinkedIn, company website, social media) and crafts an email using your name, role, colleagues, or current projects. Spear phishing emails are significantly harder to detect because they contain accurate personal details. The same link-check and domain-check principles apply, but recognising spear phishing requires extra scepticism even when content seems accurate."}},{"@type":"Question","name":"Should I report phishing emails and to whom?","acceptedAnswer":{"@type":"Answer","text":"Yes. In the UK: forward suspicious emails to report@phishing.gov.uk (NCSC's reporting service) and to your email provider's spam/phishing button. If the phishing impersonates a specific organisation (your bank, HMRC, Amazon), report to that organisation using the contact details on their official website. If you clicked a link and entered credentials, report to Action Fraud immediately. Reporting helps authorities track active campaigns and take down phishing infrastructure."}}]}</script>
+<style>
+:root{
+  --bg:#f8fafc;--bg2:#f1f5f9;--bg3:#e2e8f0;
+  --card:#ffffff;--card2:#f8fafc;--card3:#f1f5f9;
+  --p:#0d9488;--pd:#0f766e;--pl:rgba(13,148,136,.08);--pll:rgba(13,148,136,.05);
+  --danger:#dc2626;--dangerl:rgba(220,38,38,.08);--dangerd:#b91c1c;
+  --ok:#16a34a;--okl:rgba(22,163,74,.08);
+  --warn:#d97706;--warnl:rgba(217,119,6,.08);
+  --t:#0f172a;--t2:#1e293b;--t3:#334155;--t4:#475569;--t5:#64748b;
+  --bd:#e2e8f0;--bd2:#cbd5e1;
+  --rad:10px;--radl:16px;--rads:6px;
+  --sh:0 1px 8px rgba(15,23,42,.07),0 1px 3px rgba(15,23,42,.04);
+  --shp:0 8px 32px rgba(13,148,136,.15)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--t);line-height:1.7;font-size:15px}
+a{color:var(--p);text-decoration:none}a:hover{color:var(--pd)}
+strong{color:var(--t2);font-weight:700}
+code{font-family:'JetBrains Mono',monospace;font-size:.8em;background:var(--pl);color:var(--pd);padding:2px 7px;border-radius:var(--rads);border:1px solid rgba(13,148,136,.2)}
+pre{background:var(--bg2);border:1px solid var(--bd);border-left:3px solid var(--p);padding:14px 16px;overflow-x:auto;font-size:12px;color:var(--t3);line-height:1.7;margin:14px 0;font-family:'JetBrains Mono',monospace;border-radius:0 var(--rads) var(--rads) 0}
+#ck{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--bd);z-index:9999;display:none;padding:11px 20px;box-shadow:0 -2px 12px rgba(15,23,42,.08)}
+.cki{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#ck p{font-size:13px;color:var(--t4);flex:1}#ck a{color:var(--p);font-weight:600}
+.ckb{display:flex;gap:6px}
+.ckac{background:var(--p);color:#fff;border:none;padding:7px 14px;border-radius:var(--rad);cursor:pointer;font-size:13px;font-weight:600;font-family:inherit}
+.ckdc{background:var(--card2);color:var(--t4);border:1px solid var(--bd);padding:7px 11px;border-radius:var(--rad);cursor:pointer;font-size:13px;font-family:inherit;font-weight:500}
+header{background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(15,23,42,.06)}
+.hi{max-width:1160px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-ico{font-size:22px;line-height:1}
+.logo-txt{font-size:15px;font-weight:700;color:var(--t);line-height:1.2}
+.logo-txt strong{color:var(--p)}.logo-txt small{display:block;font-size:10px;color:var(--t4);font-weight:500}
+nav{display:flex;align-items:center;gap:2px}
+nav a{color:var(--t3);text-decoration:none;padding:7px 13px;border-radius:var(--rad);font-size:14px;font-weight:500;transition:all .15s}
+nav a:hover{background:var(--pl);color:var(--p)}nav a.cur{color:var(--p);background:var(--pl)}
+.ncta{background:var(--p)!important;color:#fff!important;font-weight:700!important}.ncta:hover{background:var(--pd)!important}
+.hbg{display:none;background:none;border:none;cursor:pointer;color:var(--t2);font-size:22px}
+.phero{background:var(--bg2);border-bottom:1px solid var(--bd);padding:32px 20px}
+.phero h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:700;color:var(--t);margin-bottom:8px}
+.phero p{color:var(--t3);font-size:.95rem;max-width:520px;font-weight:500}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+section{padding:56px 0}.alt{background:var(--bg2)}
+.stag{display:inline-block;background:var(--pl);border:1px solid rgba(13,148,136,.2);border-radius:999px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--p);margin-bottom:14px}
+.stit{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-.3px;line-height:1.2}
+.sdesc{color:var(--t3);max-width:560px;line-height:1.8;font-size:.95rem;font-weight:500}
+.art-layout{display:grid;grid-template-columns:1fr 260px;gap:28px;max-width:1160px;margin:0 auto;padding:32px 20px 56px}
+.art-hero{background:var(--bg2);border-bottom:1px solid var(--bd);padding:32px 20px}
+.bc{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t4);margin-bottom:14px;flex-wrap:wrap;font-weight:500}
+.bc a{color:var(--t4);text-decoration:none}.bc a:hover{color:var(--p)}
+.art-cat{font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.art-title{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:700;color:var(--t);line-height:1.25;margin-bottom:12px}
+.art-meta{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--t4);flex-wrap:wrap;font-weight:500}
+.art-body h2{font-size:.95rem;font-weight:700;color:var(--t);margin:22px 0 9px;padding-bottom:6px;border-bottom:2px solid var(--bd)}
+.art-body h3{font-size:.88rem;font-weight:700;color:var(--p);margin:16px 0 6px}
+.art-body p{color:var(--t2);margin-bottom:12px;font-size:14px;line-height:1.9;font-weight:400}
+.art-body ul,.art-body ol{padding-left:20px;margin-bottom:12px;color:var(--t2);font-size:14px;line-height:1.9;font-weight:400}
+.art-body strong{color:var(--t);font-weight:700}
+.art-body table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;border:1px solid var(--bd);border-radius:var(--rad);overflow:hidden}
+.art-body th{background:var(--pl);color:var(--pd);padding:9px 13px;text-align:left;font-size:11px;font-weight:700;border-bottom:2px solid rgba(13,148,136,.2)}
+.art-body td{padding:8px 13px;border-bottom:1px solid var(--bd);color:var(--t2);font-weight:400}
+.callout{border-left:3px solid var(--p);background:var(--pl);padding:13px 16px;margin:14px 0;font-size:14px;color:var(--t2);line-height:1.8;font-weight:400;border-radius:0 var(--rads) var(--rads) 0}
+.callout-danger{border-left:3px solid var(--danger);background:var(--dangerl);padding:13px 16px;margin:14px 0;font-size:14px;color:var(--t2);line-height:1.8;font-weight:400;border-radius:0 var(--rads) var(--rads) 0}
+.related-box{background:var(--bg2);border:1px solid var(--bd);border-left:3px solid var(--p);padding:13px 16px;margin:18px 0;border-radius:0 var(--rads) var(--rads) 0}
+.related-box p{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--p);margin-bottom:8px}
+.related-box ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px}
+.related-box li a{font-size:13px;color:var(--t3);font-weight:500}.related-box li a:hover{color:var(--p)}
+.discl{background:var(--bg2);border:1px solid var(--bd);padding:10px 13px;margin-top:20px;font-size:12px;color:var(--t4);line-height:1.6;font-weight:400;border-radius:var(--rads)}
+.tag-pill{background:var(--pl);border:1px solid rgba(13,148,136,.2);color:var(--p);padding:3px 9px;border-radius:999px;font-size:11px;display:inline-block;margin:2px;font-weight:600}
+.nav-btns{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.nav-btn{flex:1;min-width:0;padding:9px 12px;border:1px solid var(--bd);border-radius:var(--rad);text-decoration:none;color:var(--t4);font-size:12px;transition:all .15s;text-align:center;display:block;background:var(--card);font-weight:500}
+.nav-btn:hover{border-color:var(--p);color:var(--p)}
+.sc{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);padding:14px;margin-bottom:10px;box-shadow:var(--sh)}
+.sc h4{font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
+.sc a{display:block;font-size:13px;color:var(--t3);padding:6px 0;border-bottom:1px solid var(--bd);text-decoration:none;font-weight:500;transition:color .15s}
+.sc a:last-child{border:none}.sc a:hover{color:var(--p)}
+.tool-link{display:block;background:var(--p);color:#fff!important;text-align:center;padding:9px;border-radius:var(--rad);font-size:13px;font-weight:700;text-decoration:none!important;margin-top:9px}
+.bcard{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);overflow:hidden;transition:all .2s;text-decoration:none;display:block;color:inherit;box-shadow:var(--sh)}
+.bcard:hover{border-color:var(--p);transform:translateY(-2px);box-shadow:var(--shp)}
+.bimg{height:86px;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg2);border-bottom:1px solid var(--bd)}
+.bbody{padding:14px}.bcat{font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.bcard h3{font-size:.84rem;font-weight:600;color:var(--t);margin-bottom:5px;line-height:1.4}
+.bcard p{font-size:12px;color:var(--t3);line-height:1.65;margin-bottom:8px;font-weight:400}
+.bm{font-size:11px;color:var(--t4);display:flex;justify-content:space-between;font-weight:500}.rm{color:var(--p);font-weight:600}
+footer{background:var(--t);color:#f1f5f9;padding:40px 0 20px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;max-width:1160px;margin:0 auto 26px;padding:0 20px}
+.fbrand p{color:#94a3b8;font-size:12px;margin-top:8px;line-height:1.7}
+.fcc h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#94a3b8;margin-bottom:9px}
+.fcc ul{list-style:none}.fcc li{margin-bottom:6px}.fcc a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:400}.fcc a:hover{color:#e2e8f0}
+.fbot{border-top:1px solid #1e293b;padding:14px 20px 0;max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.fbot p,.fbot a{font-size:11px;color:#64748b;text-decoration:none}.fbot a:hover{color:#94a3b8}
+@media(max-width:900px){.art-layout{grid-template-columns:1fr}}
+@media(max-width:768px){nav{display:none;position:absolute;top:62px;left:0;right:0;background:var(--card);padding:12px;flex-direction:column;border-bottom:1px solid var(--bd);box-shadow:0 4px 16px rgba(15,23,42,.08)}nav.op{display:flex}.hbg{display:block}.fg{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.fg{grid-template-columns:1fr}}
+</style>
+</head><body>
+<div id="ck"><div class="cki"><p>Essential cookies only — <a href="/cookie-policy.html">Cookie Policy</a>.</p><div class="ckb"><button class="ckdc" onclick="ckC('decline')">Decline</button><button class="ckac" onclick="ckC('accept')">Accept</button></div></div></div><header><div class="hi">
+  <a href="/" class="logo"><span class="logo-ico">🛡️</span><div class="logo-txt"><strong>Trusty Password</strong><small>Anti-Phishing · Credential Guard</small></div></a>
+  <nav id="mn">
+    <a href="/">Generator</a>
+    <a href="/blog.html" class="cur">Guides</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/#tool" class="ncta">Guard My Credentials →</a>
+  </nav>
+  <button class="hbg" aria-label="Menu">☰</button>
+</div></header>
+<div class="art-hero">
+  <div style="max-width:1160px;margin:0 auto;padding:0 20px">
+    <nav class="bc"><a href="/">Home</a><span>/</span><a href="/blog.html">Guides</a><span>/</span><span style="color:var(--t4)">Phishing Awareness</span></nav>
+    <div class="art-cat">Phishing Awareness</div>
+    <h1 class="art-title">How to Spot a Phishing Email Before You Click</h1>
+    <div class="art-meta"><span>📅 7 May 2026</span><span>·</span><span>⏱ 9 min</span><span>·</span><span>✍ Sophie Laurent</span></div>
+  </div>
+</div>
+<div class="art-layout">
+  <article class="art-body">
+    <p>The majority of credential theft begins with a phishing email. Despite decades of awareness campaigns, phishing remains effective because attacks have become increasingly targeted, sophisticated, and difficult to distinguish from legitimate communication. Understanding the specific technical signals — not just "be suspicious of unexpected emails" — is what separates users who get compromised from those who don't.</p>
+<div class="related-box"><p>Related Guides</p><ul>
+<li><a href="/blog/fake-login-page-detection.html">What happens after you click: spotting fake login pages</a></li>
+<li><a href="/blog/url-inspection-before-login.html">Detailed URL inspection before entering any credentials</a></li>
+<li><a href="/">Generate phishing-resistant unique passwords with the Credential Guard</a></li>
+</ul></div>
+<h2>The Anatomy of a Phishing Email</h2>
+<p>Modern phishing emails are rarely full of obvious errors. Professional-looking templates, stolen logos, and corporate formatting are freely available. The signals that remain reliable are structural and behavioural, not cosmetic:</p>
+<table>
+  <thead><tr><th>Signal</th><th>What to check</th><th>Red flag</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Sender address</strong></td><td>Actual domain, not just display name</td><td>Domain doesn't match the organisation's website</td></tr>
+    <tr><td><strong>Link destination</strong></td><td>Hover before clicking — check destination</td><td>Domain mismatch, misspelling, URL shortener</td></tr>
+    <tr><td><strong>Urgency / threat</strong></td><td>Tone of message</td><td>"Your account will be closed in 24 hours"</td></tr>
+    <tr><td><strong>Action requested</strong></td><td>What they want you to do</td><td>Click a link, download attachment, call a number</td></tr>
+    <tr><td><strong>Salutation</strong></td><td>How they address you</td><td>"Dear Customer", "Dear Account Holder"</td></tr>
+    <tr><td><strong>Request type</strong></td><td>What they're asking for</td><td>Password, payment card, security codes</td></tr>
+  </tbody>
+</table>
+<h2>The Sender Address Trap</h2>
+<p>Email clients display a friendly "From" name (e.g. "HSBC Bank") that can be set to anything. The actual email address behind it is what matters. To check on most email clients: click or tap the sender name to expand the full address. Look at the domain after the @. For HSBC, legitimate emails come from @hsbc.com or @hsbc.co.uk — not @hsbc-secure.net, @hsbcalert.com, or @notifications-hsbc.co.uk.</p>
+<div class="callout-danger"><strong>⚠ Domain impersonation:</strong> Attackers register domains that look like the real thing — "amazon-security.com", "paypa1.com" (with a 1), "netflix-billing.net". These are different domains from the real ones. Always verify the exact domain, character by character, on any link or sender address before taking action.</div>
+<h2>The Urgency Mechanism</h2>
+<p>Urgency is the primary psychological lever in phishing. "Your account has been suspended," "Unusual activity detected — verify immediately," "Your parcel is on hold — pay within 24 hours." This language is engineered to bypass critical thinking by triggering an immediate emotional response. Legitimate services do create urgency for real issues — but they do not require you to verify via email link. If an email creates urgency, navigate directly to the service by typing the address and log in from there.</p>
+<h2>The Golden Rule</h2>
+<p>Never click a link in an email to go to a login page. If an email says your bank account needs attention, type your bank's URL directly into the browser address bar. If an email says your Amazon account has a problem, go to Amazon.co.uk or Amazon.com directly. The phishing attempt ends the moment you navigate directly rather than clicking. This single habit eliminates the majority of phishing risk regardless of how convincing the email appears.</p>
+<h2>Reporting Phishing in the UK</h2>
+<p>Forward suspicious emails to <a href="mailto:report@phishing.gov.uk">report@phishing.gov.uk</a> — this is the <a href="https://www.ncsc.gov.uk/information/report-suspicious-emails" rel="noopener" target="_blank">NCSC's Suspicious Email Reporting Service</a>. Since its launch it has received millions of reports and taken down hundreds of thousands of phishing sites. If you forward a phishing email, the NCSC analyses it and acts on any active attack infrastructure found.
+    <div style="margin-top:16px"><span class="tag-pill">phishing</span> <span class="tag-pill">email security</span> <span class="tag-pill">social engineering</span> <span class="tag-pill">NCSC</span> <span class="tag-pill">credential theft</span></div>
+    <div class="discl">For informational purposes only. Phishing threats evolve constantly — always consult current NCSC, CISA, and your organisation's security team guidance for your specific environment.</div>
+    <div class="nav-btns"><a href="/blog/fake-login-page-detection.html" class="nav-btn">How to Detect a Fake Login Page →</a></div>
+  </article>
+  <aside>
+    <div class="sc" style="border-top:2px solid var(--p)">
+      <h4>🛡️ Credential Guard</h4>
+      <p style="font-size:13px;color:var(--t3);line-height:1.6;margin-bottom:5px;font-weight:400">Generate unique phishing-resistant passwords with the 5-step Am I Safe? checklist.</p>
+      <a href="/" class="tool-link">Open Credential Guard →</a>
+    </div>
+    <div class="sc"><h4>More Guides</h4><a href="/blog/fake-login-page-detection.html">How to Detect a Fake Login Page</a>
+<a href="/blog/phishing-resistant-mfa.html">Which MFA Methods Actually Resist Phishing?</a>
+<a href="/blog/url-inspection-before-login.html">How to Inspect a URL Before Entering Your Password</a>
+<a href="/blog/credential-stuffing-vs-phishing.html">Credential Stuffing vs Phishing: Understand Both Threat</a>
+<a href="/blog/phishing-attack-response.html">What to Do Immediately After a Phishing Attack</a></div>
+  </aside>
+</div>
+<footer><div class="fg">
+  <div class="fbrand"><a href="/" style="text-decoration:none;display:flex;align-items:center;gap:8px"><span style="font-size:20px">🛡️</span><span style="font-size:15px;font-weight:700;color:#f1f5f9">Trusty Password</span></a>
+  <p>Strong passwords and phishing-awareness guidance to protect your credentials from the most common online attacks.</p></div>
+  <div class="fcc"><h4>Tool</h4><ul><li><a href="/">Credential Guard</a></li><li><a href="/#faq">FAQ</a></li></ul></div>
+  <div class="fcc"><h4>Guides</h4><ul><li><a href="/blog.html">All Guides</a></li><li><a href="/about.html">About</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
+  <div class="fcc"><h4>Legal</h4><ul><li><a href="/privacy-policy.html">Privacy</a></li><li><a href="/cookie-policy.html">Cookies</a></li><li><a href="/terms.html">Terms</a></li><li><a href="/affiliate-disclosure.html">Affiliates</a></li></ul></div>
+</div><div class="fbot">
+  <p>© 2026 trustypassword.com · Kokal Operations Ltd, United Kingdom</p>
+  <p><a href="/privacy-policy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+</div></footer><script>
+(function(){if(!localStorage.getItem('trd-ck'))document.getElementById('ck').style.display='block';})();
+function ckC(v){localStorage.setItem('trd-ck',v);document.getElementById('ck').style.display='none';}
+document.querySelector('.hbg').addEventListener('click',function(){document.getElementById('mn').classList.toggle('op');});
+</script>
+</body></html>

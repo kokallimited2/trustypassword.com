@@ -1,0 +1,60 @@
+name: Validate Site
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check core files
+        run: |
+          for f in index.html blog.html about.html contact.html privacy-policy.html \
+                   affiliate-disclosure.html terms.html cookie-policy.html 404.html \
+                   robots.txt llms.txt sitemap.xml post.json README.md; do
+            [ ! -f "$f" ] && echo "MISSING: $f" && exit 1 || echo "OK: $f"
+          done
+      - name: Check blog posts
+        run: |
+          for slug in "how-to-spot-phishing-emails" "fake-login-page-detection" "phishing-resistant-mfa" "url-inspection-before-login" "credential-stuffing-vs-phishing" "phishing-attack-response"; do
+            [ ! -f "blog/${slug}.html" ] && echo "MISSING: blog/${slug}.html" && exit 1 || echo "OK: $slug"
+          done
+      - name: Validate blog SEO
+        run: |
+          for f in blog/*.html; do
+            grep -q 'rel="canonical"' "$f" || { echo "MISSING canonical: $f"; exit 1; }
+            grep -q 'TechArticle'    "$f" || { echo "MISSING TechArticle: $f"; exit 1; }
+            grep -q 'BreadcrumbList' "$f" || { echo "MISSING BreadcrumbList: $f"; exit 1; }
+            grep -q 'FAQPage'        "$f" || { echo "MISSING FAQPage: $f"; exit 1; }
+            grep -q 'og:image'       "$f" || { echo "MISSING og:image: $f"; exit 1; }
+            echo "OK: $f"
+          done
+      - name: Validate post.json
+        run: |
+          python3 -c "
+import json
+with open('post.json') as f: d=json.load(f)
+posts=d.get('posts',[])
+assert len(posts)==6
+assert len([p for p in posts if p.get('featured')])==1
+for p in posts:
+    assert p.get('url','').startswith('/blog/')
+    assert 'content' not in p
+print('post.json OK')
+"
+      - name: blog.html no modal
+        run: grep -q 'openP(' blog.html && exit 1 || echo 'OK'
+      - name: sitemap checks
+        run: |
+          count=$(grep -c '/blog/' sitemap.xml || echo 0)
+          [ "$count" -lt 6 ] && exit 1
+          grep -q '/about.html' sitemap.xml || exit 1
+          echo "OK: $count blog URLs + about.html"
+      - name: about.html schemas
+        run: |
+          grep -q 'Person' about.html && grep -q 'Organization' about.html || exit 1
+          echo "OK"
+      - name: CSPRNG in index
+        run: grep -q 'crypto.getRandomValues' index.html || exit 1

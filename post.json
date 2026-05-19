@@ -1,0 +1,86 @@
+{
+  "site": {
+    "name": "Trusty Password",
+    "domain": "trustypassword.com"
+  },
+  "posts": [
+    {
+      "slug": "how-to-spot-phishing-emails",
+      "url": "/blog/how-to-spot-phishing-emails.html",
+      "title": "How to Spot a Phishing Email Before You Click",
+      "date": "7 May 2026",
+      "dateiso": "2026-05-07",
+      "category": "Phishing Awareness",
+      "emoji": "\ud83d\udce7",
+      "readtime": "9 min",
+      "featured": true,
+      "excerpt": "Phishing emails are the entry point for the majority of credential theft. This guide covers specific structural red flags and the golden rule that stops most attacks before they start.",
+      "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
+    },
+    {
+      "slug": "fake-login-page-detection",
+      "url": "/blog/fake-login-page-detection.html",
+      "title": "How to Detect a Fake Login Page",
+      "date": "2 May 2026",
+      "dateiso": "2026-05-02",
+      "category": "Phishing Awareness",
+      "emoji": "\ud83d\udd0d",
+      "readtime": "8 min",
+      "featured": false,
+      "excerpt": "Visual inspection is unreliable \u2014 professional phishing kits copy real pages exactly. Detection requires URL verification, HTTPS understanding, and the password manager autofill test.",
+      "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
+    },
+    {
+      "slug": "phishing-resistant-mfa",
+      "url": "/blog/phishing-resistant-mfa.html",
+      "title": "Which MFA Methods Actually Resist Phishing?",
+      "date": "27 Apr 2026",
+      "dateiso": "2026-04-27",
+      "category": "Authentication",
+      "emoji": "\ud83d\udd10",
+      "readtime": "8 min",
+      "featured": false,
+      "excerpt": "TOTP, SMS OTP, and push notifications do not resist real-time phishing attacks. Only FIDO2/WebAuthn is cryptographically phishing-resistant \u2014 and here is why the difference matters.",
+      "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
+    },
+    {
+      "slug": "url-inspection-before-login",
+      "url": "/blog/url-inspection-before-login.html",
+      "title": "How to Inspect a URL Before Entering Your Password",
+      "date": "21 Apr 2026",
+      "dateiso": "2026-04-21",
+      "category": "Practical Security",
+      "emoji": "\ud83d\udd17",
+      "readtime": "7 min",
+      "featured": false,
+      "excerpt": "The address bar is your primary defence against fake login pages. This step-by-step guide teaches the 10-second URL check that prevents the majority of phishing credential captures.",
+      "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
+    },
+    {
+      "slug": "credential-stuffing-vs-phishing",
+      "url": "/blog/credential-stuffing-vs-phishing.html",
+      "title": "Credential Stuffing vs Phishing: Understand Both Threats",
+      "date": "14 Apr 2026",
+      "dateiso": "2026-04-14",
+      "category": "Threat Awareness",
+      "emoji": "\u2694\ufe0f",
+      "readtime": "8 min",
+      "featured": false,
+      "excerpt": "Two attacks, one defence. Credential stuffing uses already-stolen passwords. Phishing steals new ones. Unique generated passwords per account independently defeat both \u2014 here is how.",
+      "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
+    },
+    {
+      "slug": "phishing-attack-response",
+      "url": "/blog/phishing-attack-response.html",
+      "title": "What to Do Immediately After a Phishing Attack",
+      "date": "7 Apr 2026",
+      "dateiso": "2026-04-07",
+      "category": "Incident Response",
+      "emoji": "\ud83d\udea8",
+      "readtime": "8 min",
+      "featured": false,
+      "excerpt": "Captured credentials can be used within minutes. This step-by-step response protocol covers the first 30 minutes after realising you entered credentials on a phishing page.",
+      "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
+    }
+  ]
+}

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Trusty Password — Anti-Phishing Password Generator | Credential Guard</title>
+<meta name="description" content="Generate strong unique passwords and learn the 5-step phishing verification protocol with the live Credential Guard. Know you're safe before you type — every time.">
+<link rel="canonical" href="https://trustypassword.com/">
+<meta property="og:title" content="Trusty Password — Anti-Phishing Credential Guard">
+<meta property="og:description" content="Generate unique passwords and learn to verify any login page in 5 steps. Built for users who want to stay ahead of phishing.">
+<meta property="og:image" content="https://trustypassword.com/assets/img/og-home.jpg">
+<meta property="og:type" content="website"><meta property="og:url" content="https://trustypassword.com/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='8' fill='%23f8fafc'/><text x='4' y='28' font-size='22'>&#x1F6E1;&#xFE0F;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Trusty Password Credential Guard","url":"https://trustypassword.com/","applicationCategory":"SecurityApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"GBP"},"description":"Anti-phishing password generator with a live 5-step 'Am I Safe?' verification checklist. Teaches users to verify login pages before entering credentials. Client-side CSPRNG."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://trustypassword.com/","name":"Trusty Password","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://trustypassword.com/blog.html?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Trusty Password","url":"https://trustypassword.com/","contactPoint":{"@type":"ContactPoint","email":"hello@trustypassword.com","contactType":"customer support"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"How to Verify a Login Page is Safe Before Entering Your Password","totalTime":"PT1M","step":[{"@type":"HowToStep","position":1,"name":"Read the domain","text":"Look at the address bar. Find the root domain — the part immediately before the first forward slash. Verify it matches the site you intend to use, character by character."},{"@type":"HowToStep","position":2,"name":"Check for HTTPS","text":"Confirm the URL starts with https:// not http://. While HTTPS alone does not guarantee legitimacy, HTTP is an immediate red flag on any login page."},{"@type":"HowToStep","position":3,"name":"Test password manager autofill","text":"If your password manager does not offer to autofill credentials on a page where you have previously saved them, the domain is different from where you saved them — a strong phishing signal."},{"@type":"HowToStep","position":4,"name":"Look for urgency tactics","text":"Legitimate services do not require you to act within hours or face account deletion. Urgency language is a hallmark of social engineering — pause and verify rather than act."},{"@type":"HowToStep","position":5,"name":"Verify directly if uncertain","text":"If anything seems wrong, navigate to the site directly by typing the address in a new browser tab rather than using any link. If the issue is real, it will appear there too."}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What is credential stuffing and how does a unique password stop it?","acceptedAnswer":{"@type":"Answer","text":"Credential stuffing uses email-and-password pairs from data breaches to attempt logins on other services. If you reuse passwords, one breach compromises every account sharing that password. A unique randomly generated password per account means a breach of one site has zero impact on any other account. This is the primary defence against credential stuffing and is why the Credential Guard generates a new unique password for every account."}},
+{"@type":"Question","name":"What is the Am I Safe? checklist?","acceptedAnswer":{"@type":"Answer","text":"The Am I Safe? checklist is a 5-step verification protocol displayed alongside the password generator. It teaches the checks users should complete before entering credentials anywhere: (1) verify the domain name is correct, (2) confirm HTTPS is present, (3) check whether your password manager autofills, (4) look for urgency manipulation tactics, and (5) navigate directly if uncertain. Completing all five steps before each login eliminates the majority of phishing risk."}},
+{"@type":"Question","name":"Why is HTTPS not enough to verify a login page is legitimate?","acceptedAnswer":{"@type":"Answer","text":"HTTPS encrypts the connection between your browser and the server — it does not verify that the server belongs to the organisation you intend to reach. Phishing sites routinely obtain free TLS certificates (from Let's Encrypt) for their domains, displaying the padlock on a fake login page. The domain name must be verified independently of the padlock. A phishing site can have a valid padlock — the domain is what matters."}},
+{"@type":"Question","name":"How does a password manager help detect phishing?","acceptedAnswer":{"@type":"Answer","text":"Password managers and browser autofill are domain-bound — they only offer to fill credentials on the exact domain where those credentials were originally saved. If you reach a phishing site (a different domain from the real one) and your password manager does not offer to autofill your credentials, this is a strong signal that the domain is wrong. This works even when the phishing page is visually perfect, because the check is technical rather than visual."}},
+{"@type":"Question","name":"What is phishing-resistant MFA and which methods qualify?","acceptedAnswer":{"@type":"Answer","text":"Phishing-resistant MFA means the authentication credential cannot be captured and replayed by an adversary-in-the-middle attack. Only FIDO2/WebAuthn (hardware security keys and passkeys) meet this standard — the cryptographic challenge is bound to the origin domain, preventing authentication on any other site. TOTP authenticator apps, SMS OTP, and push notifications do not resist phishing — real-time AiTM attacks can forward these codes within their validity window."}},
+{"@type":"Question","name":"What should I do immediately if I entered credentials on a phishing site?","acceptedAnswer":{"@type":"Answer","text":"Act immediately: (1) Navigate directly to the real site (type the URL) and change the password. (2) Revoke all active sessions in account security settings. (3) Check and restore any changed recovery email or phone number. (4) Enable or rotate MFA. (5) If financial credentials were involved, call your bank immediately using the number on the back of your card. (6) Report to NCSC at report@phishing.gov.uk and Action Fraud if financial loss occurred."}},
+{"@type":"Question","name":"What is spear phishing?","acceptedAnswer":{"@type":"Answer","text":"Spear phishing is a targeted phishing attack where the attacker researches the victim specifically — using LinkedIn, company websites, social media, and breach data — and crafts a personalised email using the victim's name, role, colleagues, or current projects. Unlike mass phishing, spear phishing emails appear accurate and relevant. The same verification steps apply: verify the sender domain, check the URL before clicking, and navigate directly to any site rather than clicking email links."}},
+{"@type":"Question","name":"How does credential stuffing differ from phishing?","acceptedAnswer":{"@type":"Answer","text":"Credential stuffing uses credentials the attacker already has from data breaches — testing them automatically against multiple services. Phishing actively collects new credentials by deceiving users into entering them on fake sites. Stuffing succeeds because of password reuse. Phishing succeeds because of deception. Unique passwords per account defend against stuffing. URL verification, phishing awareness, and FIDO2 MFA defend against phishing. Both defences together address the full threat landscape."}},
+{"@type":"Question","name":"Is it safe to use the Credential Guard on this site?","acceptedAnswer":{"@type":"Answer","text":"Yes. All password generation uses crypto.getRandomValues() — the browser's CSPRNG backed by OS hardware entropy. Nothing is transmitted to any server. No passwords are stored anywhere by this site. Open DevTools (F12), go to the Network tab, clear existing entries, and generate a password — you will see zero network requests during generation. The site has no analytics, no tracking, and no advertising."}},
+{"@type":"Question","name":"What NCSC guidance does this site follow?","acceptedAnswer":{"@type":"Answer","text":"The Trusty Password Credential Guard and all guides align with NCSC Cyber Aware guidance on password management, the NCSC's Suspicious Email Reporting Service (report@phishing.gov.uk), NCSC guidance on phishing-resistant MFA, and CISA's Implementing Phishing-Resistant MFA factsheet. The Am I Safe? protocol is derived from NCSC login page verification guidance and the NCSC Active Cyber Defence programme materials."}},
+{"@type":"Question","name":"What is the golden rule for avoiding phishing?","acceptedAnswer":{"@type":"Answer","text":"Never click a link in an email to reach a login page. If an email says your bank, HMRC, Amazon, or any service requires action, navigate directly to the site by typing the address in the browser address bar. The phishing attempt ends the moment you navigate directly rather than clicking. This single habit, combined with unique passwords per account, eliminates the majority of phishing risk regardless of how convincing the email or page appears."}}
+]}</script>
+<style>
+:root{
+  --bg:#f8fafc;--bg2:#f1f5f9;--bg3:#e2e8f0;
+  --card:#ffffff;--card2:#f8fafc;--card3:#f1f5f9;
+  --p:#0d9488;--pd:#0f766e;--pl:rgba(13,148,136,.08);--pll:rgba(13,148,136,.05);
+  --danger:#dc2626;--dangerl:rgba(220,38,38,.08);--dangerd:#b91c1c;
+  --ok:#16a34a;--okl:rgba(22,163,74,.08);
+  --warn:#d97706;--warnl:rgba(217,119,6,.08);
+  --t:#0f172a;--t2:#1e293b;--t3:#334155;--t4:#475569;--t5:#64748b;
+  --bd:#e2e8f0;--bd2:#cbd5e1;
+  --rad:10px;--radl:16px;--rads:6px;
+  --sh:0 1px 8px rgba(15,23,42,.07),0 1px 3px rgba(15,23,42,.04);
+  --shp:0 8px 32px rgba(13,148,136,.15)
+}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--t);line-height:1.7;font-size:15px}
+a{color:var(--p);text-decoration:none}a:hover{color:var(--pd)}
+strong{color:var(--t2);font-weight:700}
+code{font-family:'JetBrains Mono',monospace;font-size:.8em;background:var(--pl);color:var(--pd);padding:2px 7px;border-radius:var(--rads);border:1px solid rgba(13,148,136,.2)}
+#ck{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--bd);z-index:9999;display:none;padding:11px 20px;box-shadow:0 -2px 12px rgba(15,23,42,.08)}
+.cki{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+#ck p{font-size:13px;color:var(--t4);flex:1}#ck a{color:var(--p);font-weight:600}
+.ckb{display:flex;gap:6px}
+.ckac{background:var(--p);color:#fff;border:none;padding:7px 14px;border-radius:var(--rad);cursor:pointer;font-size:13px;font-weight:600;font-family:inherit}
+.ckdc{background:var(--card2);color:var(--t4);border:1px solid var(--bd);padding:7px 11px;border-radius:var(--rad);cursor:pointer;font-size:13px;font-family:inherit}
+header{background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(15,23,42,.06)}
+.hi{max-width:1160px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-ico{font-size:22px}.logo-txt{font-size:15px;font-weight:700;color:var(--t);line-height:1.2}
+.logo-txt strong{color:var(--p)}.logo-txt small{display:block;font-size:10px;color:var(--t4);font-weight:500}
+nav{display:flex;align-items:center;gap:2px}
+nav a{color:var(--t3);text-decoration:none;padding:7px 13px;border-radius:var(--rad);font-size:14px;font-weight:500;transition:all .15s}
+nav a:hover{background:var(--pl);color:var(--p)}nav a.cur{color:var(--p);background:var(--pl)}
+.ncta{background:var(--p)!important;color:#fff!important;font-weight:700!important}.ncta:hover{background:var(--pd)!important}
+.hbg{display:none;background:none;border:none;cursor:pointer;color:var(--t2);font-size:22px}
+/* HERO */
+.hero{padding:52px 20px 44px;background:linear-gradient(135deg,#f0fdfa 0%,#f8fafc 50%,#fef2f2 100%);border-bottom:1px solid var(--bd)}
+.hi2{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.hbadge{display:inline-flex;align-items:center;gap:7px;background:var(--pl);border:1px solid rgba(13,148,136,.2);border-radius:999px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--p);margin-bottom:18px}
+.hero h1{font-size:clamp(1.9rem,4.5vw,3rem);font-weight:700;color:var(--t);line-height:1.15;margin-bottom:14px;letter-spacing:-.4px}
+.hero h1 .teal{color:var(--p)}.hero h1 .red{color:var(--danger)}
+.hero p{color:var(--t3);line-height:1.8;font-size:1rem;margin-bottom:26px;font-weight:400}
+.hctas{display:flex;gap:10px;flex-wrap:wrap}
+.btn-p{display:inline-block;background:var(--p);color:#fff;padding:12px 26px;border-radius:var(--rad);font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 16px rgba(13,148,136,.25)}
+.btn-p:hover{background:var(--pd);transform:translateY(-1px)}
+.btn-s{display:inline-block;background:var(--card);color:var(--t3);border:1px solid var(--bd);padding:12px 20px;border-radius:var(--rad);font-size:14px;font-weight:600;text-decoration:none;transition:all .15s}
+.btn-s:hover{border-color:var(--p);color:var(--p)}
+/* threat cards */
+.threat-cards{display:flex;flex-direction:column;gap:10px}
+.tc{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--sh)}
+.tc-ico{font-size:20px;flex-shrink:0;line-height:1;margin-top:2px}
+.tc-content strong{font-size:13px;color:var(--t);display:block;margin-bottom:3px;font-weight:700}
+.tc-content span{font-size:12px;color:var(--t3);line-height:1.55;font-weight:400}
+.danger-badge{background:var(--dangerl);border:1px solid rgba(220,38,38,.2);border-radius:999px;padding:2px 8px;font-size:10px;font-weight:700;color:var(--danger);display:inline-block;margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+/* TOOL */
+.tool-sec{padding:36px 0;background:var(--bg2);border-bottom:1px solid var(--bd)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+.tool-grid{display:grid;grid-template-columns:1fr 340px;gap:16px;align-items:start}
+.tool-panel{background:var(--card);border:1px solid var(--bd);border-radius:var(--radl);overflow:hidden;box-shadow:var(--sh)}
+.panel-hd{background:var(--bg2);border-bottom:1px solid var(--bd);padding:13px 18px;display:flex;align-items:center;gap:8px}
+.panel-hd h2{font-size:13px;font-weight:700;color:var(--t);font-family:'JetBrains Mono',monospace}
+.dot-row{display:flex;gap:5px;margin-right:8px}
+.pd-r{width:11px;height:11px;border-radius:50%;background:#ef4444}
+.pd-y{width:11px;height:11px;border-radius:50%;background:#f59e0b}
+.pd-g{width:11px;height:11px;border-radius:50%;background:#22c55e}
+/* account tabs */
+.acct-tabs{display:flex;border-bottom:1px solid var(--bd);background:var(--bg2)}
+.acct-tab{flex:1;padding:9px 6px;text-align:center;cursor:pointer;font-size:12px;font-weight:600;color:var(--t4);transition:all .15s;border-right:1px solid var(--bd)}
+.acct-tab:last-child{border-right:none}.acct-tab:hover{color:var(--t3);background:var(--bg3)}
+.acct-tab.on{color:var(--p);background:var(--pl);border-bottom:2px solid var(--p);margin-bottom:-1px}
+.acct-sub{display:block;font-size:9px;font-weight:400;color:var(--t4);margin-top:2px;letter-spacing:.3px}
+.acct-tab.on .acct-sub{color:var(--p)}
+.gen-body{padding:18px}
+.pw-wrap{background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rad);padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:10px;min-height:56px}
+.pw-text{flex:1;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;color:var(--t);word-break:break-all;line-height:1.5}
+.btn-eye{background:var(--card);border:1px solid var(--bd);border-radius:var(--rads);padding:7px 10px;cursor:pointer;font-size:13px;color:var(--t4);transition:all .15s;flex-shrink:0}
+.btn-eye:hover{border-color:var(--p);color:var(--p)}
+.pw-meta{display:flex;gap:14px;font-size:12px;color:var(--t4);margin-bottom:10px;flex-wrap:wrap;font-weight:500}
+.ent-val{color:var(--p);font-weight:700;font-family:'JetBrains Mono',monospace}
+.str-track{height:6px;background:var(--bg3);border-radius:999px;overflow:hidden;margin-bottom:14px}
+.str-fill{height:100%;border-radius:999px;transition:width .4s,background .4s}
+.ctrl-row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;margin-bottom:14px}
+.cg{display:flex;flex-direction:column;gap:4px}
+.cl{font-size:10px;font-weight:700;color:var(--t4);text-transform:uppercase;letter-spacing:.8px}
+.sl-row{display:flex;align-items:center;gap:8px}
+.sl-row input[type=range]{width:110px;accent-color:var(--p)}
+.slv{font-size:15px;font-weight:700;color:var(--p);font-family:'JetBrains Mono',monospace;min-width:24px}
+.ctgs{display:flex;gap:5px;flex-wrap:wrap}
+.ctg{display:flex;align-items:center;gap:4px;padding:5px 9px;border:1px solid var(--bd);border-radius:var(--rads);cursor:pointer;background:var(--card2);transition:all .15s;user-select:none}
+.ctg input{width:12px;height:12px;accent-color:var(--p);cursor:pointer}
+.ctg label{font-size:12px;color:var(--t4);cursor:pointer;font-weight:500}
+.ctg.on{border-color:var(--p);background:var(--pl)}.ctg.on label{color:var(--p)}
+.act-row{display:flex;gap:8px}
+.btn-gen{flex:2;padding:11px;background:var(--p);color:#fff;border:none;border-radius:var(--rad);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
+.btn-gen:hover{background:var(--pd)}
+.btn-copy{flex:1;padding:11px;background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;color:var(--p);transition:all .15s}
+.btn-copy:hover{background:var(--pl);border-color:var(--p)}.btn-copy.ok{background:var(--okl);color:#14532d;border-color:var(--ok)}
+/* AM I SAFE checklist panel */
+.safe-panel{background:var(--card);border:1px solid var(--bd);border-radius:var(--radl);overflow:hidden;box-shadow:var(--sh)}
+.safe-list{padding:14px}
+.safe-hdr{font-size:9px;color:var(--t4);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--bd);font-family:'JetBrains Mono',monospace}
+.safe-step{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--bd2)}
+.safe-step:last-child{border:none}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--p);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;font-family:'JetBrains Mono',monospace}
+.step-num.done{background:var(--ok)}.step-num.warn{background:var(--danger)}
+.step-content strong{font-size:12px;color:var(--t);display:block;margin-bottom:3px;font-weight:700}
+.step-content p{font-size:11px;color:var(--t3);line-height:1.55;margin:0;font-weight:400}
+.safe-score{margin-top:14px;padding:12px;background:var(--bg2);border-radius:var(--rads);text-align:center}
+.safe-score .score-num{font-size:1.8rem;font-weight:700;color:var(--t);font-family:'JetBrains Mono',monospace;line-height:1}
+.safe-score .score-lbl{font-size:11px;color:var(--t4);margin-top:4px;font-weight:500}
+.safe-chks{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.safe-chk{display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;padding:8px 10px;border:1px solid var(--bd);border-radius:var(--rads);background:var(--card);transition:all .15s;font-weight:500;color:var(--t3)}
+.safe-chk:hover{border-color:var(--p);background:var(--pl)}
+.safe-chk input[type=checkbox]{accent-color:var(--ok);width:14px;height:14px;flex-shrink:0;cursor:pointer}
+.safe-chk.checked{background:var(--okl);border-color:rgba(22,163,74,.3);color:var(--ok)}
+/* Sections */
+section{padding:56px 0}.alt{background:var(--bg2)}
+.stag{display:inline-block;background:var(--pl);border:1px solid rgba(13,148,136,.2);border-radius:999px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--p);margin-bottom:14px}
+.stit{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-.3px;line-height:1.2}
+.sdesc{color:var(--t3);max-width:560px;line-height:1.8;font-size:.95rem}
+.fcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:24px}
+.fcc{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);padding:20px;box-shadow:var(--sh);transition:all .2s}
+.fcc:hover{box-shadow:var(--shp);transform:translateY(-2px)}
+.fcc-ico{font-size:22px;margin-bottom:10px;display:block}
+.fcc h3{font-size:.88rem;font-weight:700;color:var(--t);margin-bottom:6px}
+.fcc p{font-size:13px;color:var(--t3);line-height:1.7;font-weight:400}
+.ctable-wrap{overflow-x:auto;margin-top:22px}
+.ctable{width:100%;border-collapse:collapse;font-size:13px;border:1px solid var(--bd);overflow:hidden}
+.ctable th{background:var(--pl);color:var(--pd);padding:10px 14px;text-align:left;font-size:11px;font-weight:700;border-bottom:2px solid rgba(13,148,136,.2)}
+.ctable td{padding:9px 14px;border-bottom:1px solid var(--bd);color:var(--t2);font-weight:400}
+.ctable tr:last-child td{border:none}.ctable tr:nth-child(even){background:var(--bg2)}
+.ok-cell{color:var(--ok);font-weight:700}.no-cell{color:var(--danger);font-weight:700}.warn-cell{color:var(--warn);font-weight:700}
+.stcg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+.stcc{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);padding:20px;text-align:center;box-shadow:var(--sh)}
+.stcc .n{font-size:2.1rem;font-weight:700;color:var(--p);line-height:1;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.stcc .lb{font-size:13px;color:var(--t2);line-height:1.5;font-weight:500}
+.stcc .sr{font-size:11px;color:var(--t4);margin-top:4px;font-style:italic}
+.afg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:12px}
+.afc{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);padding:20px;box-shadow:var(--sh);transition:all .2s}
+.afc:hover{border-color:var(--p);box-shadow:var(--shp)}
+.afc h3{font-size:.88rem;font-weight:700;color:var(--t);margin-bottom:6px}
+.afc p{font-size:13px;color:var(--t3);line-height:1.65;margin-bottom:11px;font-weight:400}
+.afbtn{display:inline-block;color:var(--p);border:1px solid var(--p);padding:7px 14px;border-radius:var(--rad);font-size:13px;font-weight:600;text-decoration:none;transition:all .15s}
+.afbtn:hover{background:var(--p);color:#fff}
+.afdiscl{background:var(--bg2);border:1px solid var(--bd);border-left:3px solid var(--t4);padding:9px 13px;font-size:12px;color:var(--t4);margin-bottom:12px;display:flex;gap:7px;line-height:1.6;font-weight:400}
+.aat-grid{display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:start;margin-top:8px}
+.trust-card{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);padding:18px;box-shadow:var(--sh)}
+.trust-item{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--bd)}
+.trust-item:last-child{border:none}
+.ti-ico{font-size:15px;flex-shrink:0;margin-top:2px;color:var(--p)}
+.ti-text strong{font-size:13px;color:var(--t);display:block;margin-bottom:2px;font-weight:700}
+.ti-text span{font-size:12px;color:var(--t3);line-height:1.5;font-weight:400}
+.fql{max-width:740px;margin:28px auto 0}
+.fqi{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);margin-bottom:5px;overflow:hidden;box-shadow:var(--sh)}
+.fqi.op{border-color:var(--p)}
+.fqq{width:100%;text-align:left;background:none;border:none;padding:14px 18px;font-size:.88rem;font-weight:600;color:var(--t);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:inherit;transition:color .15s}
+.fqq:hover{color:var(--p)}.farr{color:var(--p);transition:transform .2s;font-size:12px}
+.fqi.op .farr{transform:rotate(180deg)}
+.fqa{display:none;padding:0 18px 13px;font-size:13px;color:var(--t2);line-height:1.9;border-top:1px solid var(--bd);padding-top:10px;font-weight:400}
+.fqi.op .fqa{display:block}
+.blgg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:24px}
+.bcard{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);overflow:hidden;transition:all .2s;text-decoration:none;display:block;color:inherit;box-shadow:var(--sh)}
+.bcard:hover{border-color:var(--p);transform:translateY(-2px);box-shadow:var(--shp)}
+.bimg{height:84px;display:flex;align-items:center;justify-content:center;font-size:26px;background:var(--bg2);border-bottom:1px solid var(--bd)}
+.bbody{padding:13px}.bcat{font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.bcard h3{font-size:.82rem;font-weight:600;color:var(--t);margin-bottom:4px;line-height:1.4}
+.bcard p{font-size:12px;color:var(--t3);line-height:1.65;margin-bottom:7px;font-weight:400}
+.bm{font-size:11px;color:var(--t4);display:flex;justify-content:space-between;font-weight:500}.rm{color:var(--p);font-weight:600}
+.ptg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:7px;margin-top:12px}
+.ptl{display:flex;align-items:center;gap:9px;padding:10px 12px;border:1px solid var(--bd);border-radius:var(--rad);text-decoration:none;color:var(--t3);font-size:13px;background:var(--card);transition:all .15s;box-shadow:var(--sh);font-weight:500}
+.ptl:hover{border-color:var(--p);color:var(--t)}.ptl .ico{font-size:16px;flex-shrink:0}
+.ptl .tn{font-weight:600;font-size:11px;color:var(--t2);display:block;font-family:'JetBrains Mono',monospace}.ptl .ts{font-size:10px;color:var(--t4)}
+footer{background:var(--t);color:#f1f5f9;padding:40px 0 20px}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;max-width:1160px;margin:0 auto 26px;padding:0 20px}
+.fbrand p{color:#94a3b8;font-size:12px;margin-top:8px;line-height:1.7}
+.fcc h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#94a3b8;margin-bottom:9px}
+.fcc ul{list-style:none}.fcc li{margin-bottom:6px}.fcc a{color:#94a3b8;text-decoration:none;font-size:13px}.fcc a:hover{color:#e2e8f0}
+.fbot{border-top:1px solid #1e293b;padding:14px 20px 0;max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.fbot p,.fbot a{font-size:11px;color:#64748b;text-decoration:none}.fbot a:hover{color:#94a3b8}
+@media(max-width:1000px){.tool-grid{grid-template-columns:1fr}.hi2{grid-template-columns:1fr}}
+@media(max-width:900px){.aat-grid{grid-template-columns:1fr}}
+@media(max-width:768px){nav{display:none;position:absolute;top:62px;left:0;right:0;background:var(--card);padding:12px;flex-direction:column;border-bottom:1px solid var(--bd);box-shadow:0 4px 16px rgba(15,23,42,.08)}nav.op{display:flex}.hbg{display:block}.fg{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.fg{grid-template-columns:1fr}.ctrl-row{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div id="ck"><div class="cki"><p>Essential cookies only — <a href="cookie-policy.html">Cookie Policy</a>.</p><div class="ckb"><button class="ckdc" onclick="ckC('decline')">Decline</button><button class="ckac" onclick="ckC('accept')">Accept</button></div></div></div>
+
+<header><div class="hi">
+  <a href="/" class="logo"><span class="logo-ico">🛡️</span><div class="logo-txt"><strong>Trusty Password</strong><small>Anti-Phishing · Credential Guard</small></div></a>
+  <nav id="mn">
+    <a href="/" class="cur">Generator</a>
+    <a href="blog.html">Guides</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="#tool" class="ncta">Guard My Credentials →</a>
+  </nav>
+  <button class="hbg" aria-label="Menu">☰</button>
+</div></header>
+
+<!-- HERO -->
+<section class="hero" role="banner">
+  <div class="hi2">
+    <div>
+      <div class="hbadge">🛡️ Anti-Phishing Credential Guard</div>
+      <h1>Know you're safe before you <span class="teal">type.</span><br>Defend against <span class="red">phishing.</span></h1>
+      <p>Generate strong unique passwords and learn the 5-step verification protocol that stops phishing before credentials are ever entered. Trusted by users who've been targeted — and by those who never want to be.</p>
+      <div class="hctas">
+        <a href="#tool" class="btn-p">🛡️ Open Credential Guard</a>
+        <a href="/blog/fake-login-page-detection.html" class="btn-s">Detect fake pages →</a>
+      </div>
+    </div>
+    <div class="threat-cards">
+      <div class="tc"><span class="tc-ico">🎣</span><div class="tc-content"><div class="danger-badge">THREAT</div><strong>Phishing</strong><span>Fake login pages capture credentials in real time. 91% of cyberattacks start with a phishing email — NCSC 2025.</span></div></div>
+      <div class="tc"><span class="tc-ico">🔄</span><div class="tc-content"><div class="danger-badge">THREAT</div><strong>Credential Stuffing</strong><span>Breached passwords tested automatically across services. One reused password = every account at risk.</span></div></div>
+      <div class="tc"><span class="tc-ico">✅</span><div class="tc-content"><strong style="color:var(--ok)">The Defence</strong><span>Unique generated passwords + 5-step login verification. Independently defeats both attack types.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOP-07: PHISHING-AWARE CREDENTIAL GUARD -->
+<section id="tool" class="tool-sec">
+<div class="wrap">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+    <div>
+      <div class="stag">🛡️ SOP-07 — Phishing-Aware Credential Guard</div>
+      <h2 class="stit" style="font-size:1.3rem;margin:0">Generate · Verify · Stay safe</h2>
+    </div>
+    <div style="font-size:12px;color:var(--t4);text-align:right;font-family:'JetBrains Mono',monospace">Client-side CSPRNG only<br>Zero transmission to any server</div>
+  </div>
+  <div class="tool-grid">
+    <!-- LEFT: Password Generator -->
+    <div class="tool-panel">
+      <div class="panel-hd">
+        <div class="dot-row"><div class="pd-r"></div><div class="pd-y"></div><div class="pd-g"></div></div>
+        <h2>🛡️ trustypassword.com — credential guard</h2>
+      </div>
+      <div class="acct-tabs">
+        <div class="acct-tab on" data-len="20" onclick="setAcct(this)">Standard<span class="acct-sub">20 chars</span></div>
+        <div class="acct-tab" data-len="20" onclick="setAcct(this)">Email<span class="acct-sub">+4 chars</span></div>
+        <div class="acct-tab" data-len="20" onclick="setAcct(this)">Social<span class="acct-sub">+2 chars</span></div>
+        <div class="acct-tab" data-len="20" onclick="setAcct(this)">Work<span class="acct-sub">+4 chars</span></div>
+        <div class="acct-tab" data-len="20" onclick="setAcct(this)">Banking<span class="acct-sub">+6 chars</span></div>
+      </div>
+      <div class="gen-body">
+        <div class="pw-wrap">
+          <div class="pw-text" id="pwt" style="color:var(--t4);font-style:italic">Generate a password →</div>
+          <button class="btn-eye" id="eyeBtn" onclick="toggleShow()">👁</button>
+        </div>
+        <div class="pw-meta">
+          <span id="pwLen">—</span>
+          <span class="ent-val" id="pwEnt">—</span>
+          <span id="pwStr" style="font-weight:600">—</span>
+        </div>
+        <div class="str-track"><div class="str-fill" id="strBar" style="width:0"></div></div>
+        <div class="ctrl-row">
+          <div class="cg">
+            <span class="cl">Length</span>
+            <div class="sl-row">
+              <input type="range" id="slen" min="12" max="40" value="20" aria-label="Password length" oninput="document.getElementById('vlen').textContent=this.value;generate()">
+              <span class="slv" id="vlen">20</span>
+            </div>
+          </div>
+          <div class="cg">
+            <span class="cl">Characters</span>
+            <div class="ctgs">
+              <label class="ctg on" id="tgu"><input type="checkbox" id="cu" checked onchange="togCtg(this,'tgu')"><label for="cu">A–Z</label></label>
+              <label class="ctg on" id="tgl"><input type="checkbox" id="cl2" checked onchange="togCtg(this,'tgl')"><label for="cl2">a–z</label></label>
+              <label class="ctg on" id="tgn"><input type="checkbox" id="cn" checked onchange="togCtg(this,'tgn')"><label for="cn">0–9</label></label>
+              <label class="ctg on" id="tgs"><input type="checkbox" id="cs" checked onchange="togCtg(this,'tgs')"><label for="cs">!@#</label></label>
+            </div>
+          </div>
+        </div>
+        <div class="act-row">
+          <button class="btn-gen" onclick="generate()">🛡️ Generate Password</button>
+          <button class="btn-copy" id="cpbtn" onclick="copyPwd()">Copy</button>
+        </div>
+        <div style="margin-top:13px;padding:11px;background:var(--bg2);border:1px solid var(--bd);border-radius:var(--rads);font-size:12px;color:var(--t4);line-height:1.7;font-family:'JetBrains Mono',monospace">
+          <span style="color:var(--ok);font-weight:700">✓</span> crypto.getRandomValues() — OS hardware entropy<br>
+          <span style="color:var(--ok);font-weight:700">✓</span> Zero network requests during generation<br>
+          <span style="color:var(--ok);font-weight:700">✓</span> Nothing stored by this site
+        </div>
+      </div>
+    </div>
+    <!-- RIGHT: Am I Safe? Checklist -->
+    <div class="safe-panel">
+      <div class="panel-hd">
+        <div class="dot-row"><div class="pd-r"></div><div class="pd-y"></div><div class="pd-g"></div></div>
+        <h2 style="color:var(--p)">Am I Safe? — 5-step protocol</h2>
+      </div>
+      <div class="safe-list">
+        <div class="safe-hdr">complete before entering credentials anywhere</div>
+        <div class="safe-score">
+          <div class="score-num" id="scoreNum">0/5</div>
+          <div class="score-lbl" id="scoreLbl">Tick each step before logging in anywhere</div>
+        </div>
+        <div class="safe-chks">
+          <label class="safe-chk" id="chk1"><input type="checkbox" onchange="updateScore()">
+            <div><strong>1. Domain verified</strong><br><span>Read the address bar carefully. The root domain — before the first / — matches exactly what you expect, character by character.</span></div>
+          </label>
+          <label class="safe-chk" id="chk2"><input type="checkbox" onchange="updateScore()">
+            <div><strong>2. HTTPS confirmed</strong><br><span>The URL starts with https:// not http://. A padlock confirms encryption — not that the site is legitimate.</span></div>
+          </label>
+          <label class="safe-chk" id="chk3"><input type="checkbox" onchange="updateScore()">
+            <div><strong>3. Password manager autofills</strong><br><span>Your manager offered to fill credentials automatically — it only does this on the exact saved domain. No autofill = possible phishing.</span></div>
+          </label>
+          <label class="safe-chk" id="chk4"><input type="checkbox" onchange="updateScore()">
+            <div><strong>4. No urgency tactics</strong><br><span>"Act now or your account closes." Urgency is the primary phishing lever. Legitimate services don't require instant action via email link.</span></div>
+          </label>
+          <label class="safe-chk" id="chk5"><input type="checkbox" onchange="updateScore()">
+            <div><strong>5. Navigated directly</strong><br><span>You reached this page by typing the address or using a bookmark — not by clicking an email or SMS link.</span></div>
+          </label>
+        </div>
+        <div id="safe-verdict" style="display:none;margin-top:11px;padding:11px;border-radius:var(--rads);font-size:13px;font-weight:600;text-align:center"></div>
+        <div style="margin-top:11px;padding:10px;background:var(--bg2);border-radius:var(--rads);font-size:11px;color:var(--t4);line-height:1.65;font-weight:400">
+          💡 <strong style="color:var(--t3)">Golden rule:</strong> Never click an email link to reach a login page. Always type the address directly.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FEATURES -->
+<section>
+  <div class="wrap">
+    <div class="stag">Why Trusty Password</div>
+    <h2 class="stit">Two threats. One coordinated defence.</h2>
+    <p class="sdesc">The Credential Guard addresses both primary attack vectors simultaneously — the unique password defeats stuffing, the verification protocol defeats phishing.</p>
+    <div class="fcg">
+      <div class="fcc"><span class="fcc-ico">🎣</span><h3>Phishing awareness built in</h3><p>The Am I Safe? checklist teaches the 5 verification steps alongside every generated password — building habits, not just credentials.</p></div>
+      <div class="fcc"><span class="fcc-ico">🔄</span><h3>Credential stuffing defence</h3><p>Each generated password is unique — a breach of any one site cannot compromise another account sharing a different password.</p></div>
+      <div class="fcc"><span class="fcc-ico">🔐</span><h3>Password manager integration</h3><p>Store generated passwords in a password manager. Autofill becomes your phishing detector — the manager won't fill on a fake domain.</p></div>
+      <div class="fcc"><span class="fcc-ico">📊</span><h3>Phishing-resistant MFA guide</h3><p>Learn which MFA methods actually resist phishing (FIDO2) and which don't (TOTP, SMS) — a critical distinction most guides miss.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MFA TABLE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="stag">MFA Phishing Resistance</div>
+    <h2 class="stit">Not all MFA protects against phishing</h2>
+    <p class="sdesc">Real-time adversary-in-the-middle (AiTM) attacks can bypass TOTP, SMS, and push notification MFA. Only FIDO2/WebAuthn is categorically phishing-resistant.</p>
+    <div class="ctable-wrap">
+    <table class="ctable">
+      <thead><tr><th>MFA Method</th><th>Phishing-resistant</th><th>SIM swap-resistant</th><th>Why</th><th>NIST AAL</th></tr></thead>
+      <tbody>
+        <tr><td><strong>FIDO2/WebAuthn hardware key</strong></td><td class="ok-cell">✓ Yes</td><td class="ok-cell">✓ Yes</td><td>Cryptographic origin binding — cannot authenticate on wrong domain</td><td>AAL3</td></tr>
+        <tr><td><strong>Passkeys</strong></td><td class="ok-cell">✓ Yes</td><td class="ok-cell">✓ Yes</td><td>Same origin binding, platform-managed</td><td>AAL2–3</td></tr>
+        <tr><td>TOTP authenticator app</td><td class="no-cell">✗ No</td><td class="ok-cell">✓ Yes</td><td>6-digit codes forwardable in real-time AiTM attacks</td><td>AAL2</td></tr>
+        <tr><td>Push notification (Duo, MS)</td><td class="no-cell">✗ No</td><td class="ok-cell">✓ Yes</td><td>MFA fatigue attacks — user approves under repeated prompts</td><td>AAL2</td></tr>
+        <tr><td>SMS OTP</td><td class="no-cell">✗ No</td><td class="no-cell">✗ No</td><td>Forwardable + SIM swap + SS7 interception</td><td>AAL1</td></tr>
+        <tr><td>Email OTP</td><td class="no-cell">✗ No</td><td class="no-cell">✗ No</td><td>Forwardable + requires email account not compromised</td><td>AAL1</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font-size:12px;color:var(--t4);margin-top:10px;font-weight:400">Source: <a href="https://www.cisa.gov/resources-tools/resources/implementing-phishing-resistant-mfa" rel="noopener" target="_blank">CISA Implementing Phishing-Resistant MFA</a> · NIST SP 800-63B 2025</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section>
+  <div class="wrap">
+    <div class="stag">The Reality</div>
+    <h2 class="stit">Phishing and credential theft by the numbers</h2>
+    <div class="stcg">
+      <div class="stcc"><div class="n">91%</div><div class="lb">of cyberattacks begin with a phishing email</div><div class="sr">NCSC / Proofpoint 2025</div></div>
+      <div class="stcc"><div class="n">3.4B</div><div class="lb">phishing emails sent daily worldwide</div><div class="sr">AAG 2025</div></div>
+      <div class="stcc"><div class="n">14B+</div><div class="lb">compromised credentials in known breach databases</div><div class="sr">HaveIBeenPwned 2026</div></div>
+      <div class="stcc"><div class="n">5</div><div class="lb">verification steps to complete before entering any credential</div><div class="sr">trustypassword.com</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- AFFILIATE -->
+<section class="alt">
+  <div class="wrap">
+    <div class="stag">Complete Your Defences</div>
+    <h2 class="stit">Tools that strengthen the full protection stack</h2>
+    <div class="afdiscl"><span>ℹ</span><span><strong>Affiliate disclosure:</strong> Some links earn a small commission at no cost to you. We only recommend tools with genuine security merit. <a href="affiliate-disclosure.html">Full disclosure →</a></span></div>
+    <div class="afg">
+      <div class="afc"><h3>🔑 YubiKey 5 Series</h3><p>FIDO2/WebAuthn hardware security key — the only MFA method that is cryptographically phishing-resistant. Used by Google, the UK government, and GCHQ-affiliated organisations. Works with Gmail, Outlook, GitHub, and most major services.</p><a href="#affiliate-yubikey" class="afbtn" rel="nofollow sponsored" target="_blank">Shop YubiKey →</a></div>
+      <div class="afc"><h3>🗝️ 1Password</h3><p>Independently audited password manager with phishing detection built in — the autofill system is domain-bound and alerts when you visit a site that differs from where credentials were saved.</p><a href="#affiliate-1password" class="afbtn" rel="nofollow sponsored" target="_blank">Try 1Password →</a></div>
+      <div class="afc"><h3>🛡️ Proton Mail</h3><p>End-to-end encrypted email reduces phishing risk from the platform side. Zero-knowledge architecture means email contents are not accessible to Proton even under legal request. Available with custom domain.</p><a href="#affiliate-proton" class="afbtn" rel="nofollow sponsored" target="_blank">Try Proton →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- E-E-A-T -->
+<section>
+  <div class="wrap">
+    <div class="aat-grid">
+      <div>
+        <div class="stag">About</div>
+        <h2 class="stit">Written by a cybersecurity awareness trainer</h2>
+        <p style="color:var(--t3);font-size:.95rem;line-height:1.8;margin-bottom:14px;font-weight:400">The guides and Credential Guard on this site are written by <strong>Sophie Laurent</strong>, a cybersecurity awareness trainer who has designed and delivered security awareness programmes for FTSE 250 companies, NHS trusts, and public sector organisations across the UK. Sophie specialises in translating technical threats into actionable guidance that non-technical employees and individuals can actually apply.</p>
+        <p style="color:var(--t3);font-size:.95rem;line-height:1.8;margin-bottom:18px;font-weight:400">All content aligns with <a href="https://www.ncsc.gov.uk" rel="noopener" target="_blank">NCSC</a> phishing guidance, <a href="https://www.cisa.gov" rel="noopener" target="_blank">CISA</a> phishing-resistant MFA recommendations, and <a href="https://pages.nist.gov/800-63-4/" rel="noopener" target="_blank">NIST SP 800-63B 2025</a>.</p>
+        <a href="about.html" style="display:inline-block;background:var(--p);color:#fff;padding:10px 22px;border-radius:var(--rad);font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(13,148,136,.25)">About Sophie Laurent →</a>
+      </div>
+      <div class="trust-card">
+        <div style="font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px">Trust Signals</div>
+        <div class="trust-item"><span class="ti-ico">✅</span><div class="ti-text"><strong>NCSC & CISA aligned</strong><span>All guidance follows NCSC phishing guidance and CISA phishing-resistant MFA recommendations.</span></div></div>
+        <div class="trust-item"><span class="ti-ico">✅</span><div class="ti-text"><strong>Client-side CSPRNG</strong><span>crypto.getRandomValues() exclusively. Zero transmission. Verify in DevTools.</span></div></div>
+        <div class="trust-item"><span class="ti-ico">✅</span><div class="ti-text"><strong>No tracking or analytics</strong><span>Zero advertising, zero fingerprinting, zero telemetry on this site.</span></div></div>
+        <div class="trust-item"><span class="ti-ico">✅</span><div class="ti-text"><strong>UK operated</strong><span>Kokal Operations Ltd, England &amp; Wales. UK GDPR compliant.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section style="padding:28px 0;border-top:1px solid var(--bd)">
+  <div class="wrap">
+    <h2 style="font-size:.88rem;font-weight:700;color:var(--t);margin-bottom:5px">Portfolio</h2>
+    <p style="font-size:12px;color:var(--t4);margin-bottom:12px">Specialist password tools for every audience and use case.</p>
+    <div class="ptg">
+      <a href="https://bestpasswordgenerator.org" class="ptl" rel="noopener" target="_blank"><span class="ico">⭐</span><span><span class="tn">bestpasswordgenerator.org</span><span class="ts">Strength visualiser</span></span></a>
+      <a href="https://freestrongpassword.com" class="ptl" rel="noopener" target="_blank"><span class="ico">🌿</span><span><span class="tn">freestrongpassword.com</span><span class="ts">Beginner wizard</span></span></a>
+      <a href="https://instantpasswordgenerator.org" class="ptl" rel="noopener" target="_blank"><span class="ico">⚡</span><span><span class="tn">instantpasswordgenerator.org</span><span class="ts">IT bulk generator</span></span></a>
+      <a href="https://ironvaultkeys.com" class="ptl" rel="noopener" target="_blank"><span class="ico">🔑</span><span><span class="tn">ironvaultkeys.com</span><span class="ts">Enterprise compliance</span></span></a>
+      <a href="https://randompasswordtool.com" class="ptl" rel="noopener" target="_blank"><span class="ico">🔧</span><span><span class="tn">randompasswordtool.com</span><span class="ts">API simulator</span></span></a>
+      <a href="https://securekeygenerator.com" class="ptl" rel="noopener" target="_blank"><span class="ico">🔐</span><span><span class="tn">securekeygenerator.com</span><span class="ts">Privacy-maximalist</span></span></a>
+      <a href="https://titanpasswords.com" class="ptl" rel="noopener" target="_blank"><span class="ico">🏦</span><span><span class="tn">titanpasswords.com</span><span class="ts">Banking-grade</span></span></a>
+      <a href="https://safepassbuilder.com" class="ptl" rel="noopener" target="_blank"><span class="ico">👨‍👩‍👧</span><span><span class="tn">safepassbuilder.com</span><span class="ts">Family safety</span></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="alt">
+  <div class="wrap" style="text-align:center"><div class="stag">FAQ</div><h2 class="stit">Frequently asked questions</h2></div>
+  <div class="fql">
+    <div class="fqi"><button class="fqq">What is credential stuffing and how does a unique password stop it?<span class="farr">▾</span></button><div class="fqa">Credential stuffing uses email-and-password pairs from data breaches to attempt logins on other services. If you reuse passwords, one breach exposes every account sharing that password. A unique generated password per account means a breach of one site has zero impact on any other — the most important single habit in account security.</div></div>
+    <div class="fqi"><button class="fqq">What is the Am I Safe? checklist?<span class="farr">▾</span></button><div class="fqa">A 5-step verification protocol to complete before entering credentials anywhere: (1) verify the domain name, (2) confirm HTTPS, (3) confirm password manager autofills, (4) check for urgency manipulation, (5) confirm you navigated directly rather than clicking an email link. Completing all five steps before each login eliminates the majority of phishing risk.</div></div>
+    <div class="fqi"><button class="fqq">Why doesn't HTTPS make a login page safe?<span class="farr">▾</span></button><div class="fqa">HTTPS encrypts the connection but does not verify that the server belongs to the organisation you intend. Phishing sites routinely obtain free TLS certificates — the padlock appears on fake login pages. The domain name must be verified independently of the padlock. Always check the root domain, not just the presence of HTTPS.</div></div>
+    <div class="fqi"><button class="fqq">Which MFA methods actually resist phishing?<span class="farr">▾</span></button><div class="fqa">Only FIDO2/WebAuthn hardware keys and passkeys are cryptographically phishing-resistant — the credential is bound to the origin domain and cannot authenticate on any other site. TOTP, SMS OTP, push notifications, and email OTP do not resist phishing — real-time AiTM attacks can forward these codes within their validity window. CISA's guidance explicitly names FIDO2 as the standard for phishing-resistant MFA.</div></div>
+    <div class="fqi"><button class="fqq">What should I do immediately after entering credentials on a phishing site?<span class="farr">▾</span></button><div class="fqa">Act immediately: (1) Navigate directly to the real site and change the password. (2) Revoke all active sessions. (3) Check recovery email and phone haven't been changed. (4) Enable or rotate MFA. (5) If financial credentials, call your bank immediately. (6) Report to NCSC at report@phishing.gov.uk. See our full <a href="/blog/phishing-attack-response.html">phishing response guide →</a></div></div>
+    <div class="fqi"><button class="fqq">How does a password manager help detect phishing?<span class="farr">▾</span></button><div class="fqa">Password managers are domain-bound — they only autofill credentials on the exact domain where they were originally saved. On a phishing page (a different domain), the manager won't offer to fill. No autofill appearing for a site where you have saved credentials is a strong phishing signal. This works even when the fake page is visually perfect.</div></div>
+    <div class="fqi"><button class="fqq">What is the golden rule for avoiding phishing?<span class="farr">▾</span></button><div class="fqa">Never click a link in an email to reach a login page. If an email says your bank, HMRC, Amazon, or any service requires action, navigate directly to the site by typing the address in a new browser tab. The phishing attempt ends the moment you navigate directly rather than clicking. This single habit, combined with unique passwords, eliminates the majority of phishing risk.</div></div>
+    <div class="fqi"><button class="fqq">Is this generator safe to use?<span class="farr">▾</span></button><div class="fqa">Yes. All generation uses <code>crypto.getRandomValues()</code> — the browser's CSPRNG backed by OS hardware entropy. Nothing is transmitted to any server. No passwords are stored by this site. Open DevTools (F12) → Network → Clear → Generate to verify zero requests during generation.</div></div>
+    <div class="fqi"><button class="fqq">What NCSC resources support the guidance on this site?<span class="farr">▾</span></button><div class="fqa">All content aligns with NCSC Cyber Aware guidance, the NCSC Suspicious Email Reporting Service (report@phishing.gov.uk), NCSC guidance on phishing-resistant MFA, and CISA's Implementing Phishing-Resistant MFA factsheet. The Am I Safe? protocol is derived from NCSC login page verification guidance.</div></div>
+    <div class="fqi"><button class="fqq">What is spear phishing and am I at risk?<span class="farr">▾</span></button><div class="fqa">Spear phishing is a targeted attack where the attacker researches you specifically — using LinkedIn, company websites, and social media — to craft a personalised email. Unlike mass phishing, spear phishing emails contain accurate personal details and are significantly harder to spot. The same 5 verification steps apply: verify the domain before entering credentials regardless of how convincing the message.</div></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px">
+      <div><div class="stag">Phishing Guides</div><h2 class="stit">Know the threats. Defeat them.</h2></div>
+      <a href="blog.html" style="color:var(--p);font-size:14px;font-weight:600">All guides →</a>
+    </div>
+    <div class="blgg" id="blgp"></div>
+  </div>
+</section>
+
+<footer><div class="fg">
+  <div class="fbrand"><a href="/" style="text-decoration:none;display:flex;align-items:center;gap:8px"><span style="font-size:20px">🛡️</span><span style="font-size:15px;font-weight:700;color:#f1f5f9">Trusty Password</span></a>
+  <p>Strong passwords and phishing-awareness guidance. Defeating credential stuffing and phishing together.</p></div>
+  <div class="fcc"><h4>Tool</h4><ul><li><a href="/">Credential Guard</a></li><li><a href="/#faq">FAQ</a></li></ul></div>
+  <div class="fcc"><h4>Guides</h4><ul><li><a href="blog.html">All Guides</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="fcc"><h4>Legal</h4><ul><li><a href="privacy-policy.html">Privacy</a></li><li><a href="cookie-policy.html">Cookies</a></li><li><a href="terms.html">Terms</a></li><li><a href="affiliate-disclosure.html">Affiliates</a></li></ul></div>
+</div><div class="fbot">
+  <p>© 2026 TrustyPassword.com · Kokal Operations Ltd, United Kingdom</p>
+  <p><a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+</div></footer>
+
+<script>
+(function(){if(!localStorage.getItem('trd-ck'))document.getElementById('ck').style.display='block';})();
+function ckC(v){localStorage.setItem('trd-ck',v);document.getElementById('ck').style.display='none';}
+document.querySelector('.hbg').addEventListener('click',function(){document.getElementById('mn').classList.toggle('op');});
+
+var shown=false,curPwd='';
+var ACCT_BOOSTS=[0,4,2,4,6];
+var curBoost=0;
+
+function setAcct(el){
+  var tabs=document.querySelectorAll('.acct-tab');
+  tabs.forEach(function(t){t.classList.remove('on');});
+  el.classList.add('on');
+  var idx=Array.from(el.parentElement.children).indexOf(el);
+  curBoost=ACCT_BOOSTS[idx]||0;
+  var base=parseInt(document.getElementById('slen').value)||20;
+  var newLen=Math.min(40,base+curBoost-curBoost);
+  // Just trigger new gen at current settings
+  generate();
+}
+function togCtg(cb,id){document.getElementById(id).classList.toggle('on',cb.checked);}
+function toggleShow(){
+  shown=!shown;
+  if(curPwd){document.getElementById('pwt').textContent=shown?curPwd:'•'.repeat(curPwd.length);}
+  document.getElementById('eyeBtn').textContent=shown?'🙈':'👁';
+}
+function buildCS(){
+  var s='';
+  if(document.getElementById('cu').checked)s+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(document.getElementById('cl2').checked)s+='abcdefghijklmnopqrstuvwxyz';
+  if(document.getElementById('cn').checked)s+='0123456789';
+  if(document.getElementById('cs').checked)s+='!@#$%^&*-_=+[]|;:,.?';
+  return s||'abcdefghijklmnopqrstuvwxyz';
+}
+function generate(){
+  var base=Math.max(12,Math.min(40,parseInt(document.getElementById('slen').value)||20));
+  var len=Math.min(40,base+curBoost);
+  document.getElementById('vlen').textContent=base;
+  var cs=buildCS();
+  var arr=new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  curPwd=Array.from(arr).map(function(n){return cs[n%cs.length];}).join('');
+  shown=false;
+  var el=document.getElementById('pwt');
+  el.style.color='var(--t)';el.style.fontStyle='normal';
+  el.textContent='•'.repeat(len);
+  document.getElementById('eyeBtn').textContent='👁';
+  var pool=0;
+  if(document.getElementById('cu').checked)pool+=26;
+  if(document.getElementById('cl2').checked)pool+=26;
+  if(document.getElementById('cn').checked)pool+=10;
+  if(document.getElementById('cs').checked)pool+=22;
+  if(!pool)pool=26;
+  var ent=Math.floor(len*Math.log2(pool));
+  var pct=Math.min(100,Math.round(ent/1.5));
+  var col=ent<70?'#dc2626':ent<90?'#d97706':ent<110?'#16a34a':'#0d9488';
+  var lbl=ent<70?'Needs work':ent<90?'Good':ent<110?'Strong':'Excellent';
+  document.getElementById('pwLen').textContent=len+' characters';
+  document.getElementById('pwEnt').textContent=ent+' bits entropy';
+  document.getElementById('pwStr').textContent=lbl;
+  document.getElementById('pwStr').style.color=col;
+  document.getElementById('strBar').style.width=pct+'%';
+  document.getElementById('strBar').style.background=col;
+}
+function copyPwd(){
+  if(!curPwd)return;
+  navigator.clipboard.writeText(curPwd).then(function(){
+    var b=document.getElementById('cpbtn');b.textContent='Copied ✓';b.classList.add('ok');
+    setTimeout(function(){b.textContent='Copy';b.classList.remove('ok');},2200);
+  });
+}
+// Am I Safe checklist
+function updateScore(){
+  var chks=document.querySelectorAll('.safe-chk input[type=checkbox]');
+  var score=0;
+  chks.forEach(function(cb,i){
+    var lbl=cb.closest('.safe-chk');
+    if(cb.checked){score++;lbl.classList.add('checked');}
+    else{lbl.classList.remove('checked');}
+  });
+  document.getElementById('scoreNum').textContent=score+'/5';
+  var verdict=document.getElementById('safe-verdict');
+  if(score===5){
+    verdict.style.display='block';
+    verdict.style.background='var(--okl)';
+    verdict.style.border='1px solid rgba(22,163,74,.3)';
+    verdict.style.color='#14532d';
+    verdict.textContent='✅ All 5 checks passed — safe to enter your credentials.';
+    document.getElementById('scoreLbl').textContent='All checks passed — proceed with confidence';
+  } else if(score>0){
+    verdict.style.display='none';
+    document.getElementById('scoreLbl').textContent=score+' of 5 steps complete';
+  } else {
+    verdict.style.display='none';
+    document.getElementById('scoreLbl').textContent='Tick each step before logging in anywhere';
+  }
+}
+document.querySelectorAll('.fqq').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var item=this.parentElement,isOp=item.classList.contains('op');
+    document.querySelectorAll('.fqi').forEach(function(i){i.classList.remove('op');});
+    if(!isOp)item.classList.add('op');
+  });
+});
+fetch('post.json').then(function(r){return r.json();}).then(function(d){
+  var c=document.getElementById('blgp');if(!c)return;
+  (d.posts||[]).slice(0,3).forEach(function(p){
+    var a=document.createElement('a');a.href=p.url;a.className='bcard';
+    a.innerHTML='<div class="bimg">'+(p.emoji||'🛡️')+'</div><div class="bbody"><div class="bcat">'+(p.category||p.cat||'')+'</div><h3>'+p.title+'</h3><p>'+(p.excerpt||'').substring(0,90)+'…</p><div class="bm"><span>'+p.date+'</span><span class="rm">read →</span></div></div>';
+    c.appendChild(a);
+  });
+}).catch(function(){});
+generate();
+</script>
+</body>
+</html>

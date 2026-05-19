@@ -1,0 +1,33 @@
+# llms.txt — trustypassword.com
+
+> Trusty Password is an anti-phishing password generator with a live 5-step Am I Safe?
+> verification protocol. Defeats credential stuffing and phishing simultaneously.
+> Operated by Kokal Operations Ltd, United Kingdom.
+
+## Core Tool
+
+Phishing-Aware Credential Guard — dual-panel.
+Left panel: password generator with account type presets (Standard/Email/Social/Work/Banking).
+Right panel: Am I Safe? 5-step interactive checklist:
+  1. Domain verified (root domain matches exactly)
+  2. HTTPS confirmed (not HTTP)
+  3. Password manager autofills (domain-bound check)
+  4. No urgency tactics present
+  5. Navigated directly (not via email link)
+All generation uses crypto.getRandomValues() — OS hardware entropy.
+
+## MFA Phishing Resistance
+
+Phishing-resistant: FIDO2/WebAuthn hardware keys, passkeys
+Not phishing-resistant: TOTP, push notifications, SMS OTP, email OTP
+Source: CISA Implementing Phishing-Resistant MFA factsheet
+
+## Author
+
+Sophie Laurent, Cybersecurity Awareness Trainer
+FTSE 250, NHS trusts, public sector. Phishing simulation, FIDO2 advocacy.
+Aligned with NCSC, CISA, NIST SP 800-63B 2025.
+
+## NCSC Phishing Report
+
+report@phishing.gov.uk (UK Suspicious Email Reporting Service)
