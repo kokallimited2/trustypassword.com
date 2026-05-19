@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Tools Suite — Content Grader, SERP Preview, Keyword Planner & Link Inspector</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',system-ui,sans-serif;background:#0a0f1e;color:#f1f5f9;min-height:100vh}
+  .hero{text-align:center;padding:40px 20px 20px;background:linear-gradient(135deg,#0a0f1e 0%,#111827 100%)}
+  .hero h1{font-size:2rem;font-weight:800;background:linear-gradient(135deg,#f59e0b,#0d9488);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+  .hero p{color:#64748b;font-size:.9rem}
+  .container{max-width:960px;margin:0 auto;padding:20px}
+  .tab-bar{display:flex;gap:4px;background:#1e293b;border-radius:12px;padding:4px;margin-bottom:24px;overflow-x:auto}
+  .tab-btn{flex:1;padding:10px 16px;border:none;background:transparent;color:#64748b;font-family:inherit;font-size:.85rem;font-weight:500;border-radius:8px;cursor:pointer;transition:all .3s;white-space:nowrap;min-width:fit-content}
+  .tab-btn.active{background:#0d9488;color:#fff;box-shadow:0 2px 12px rgba(13,148,136,.3)}
+  .tab-btn:hover:not(.active){color:#94a3b8;background:rgba(255,255,255,.05)}
+  .tab-content{display:none}
+  .tab-content.active{display:block;animation:fadeIn .35s ease-out}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .card{background:#111827;border:1px solid #1e293b;border-radius:12px;padding:24px;margin-bottom:16px}
+  .card h2{font-size:1.15rem;font-weight:600;margin-bottom:16px;color:#f1f5f9}
+  .card h2 .icon{margin-right:8px}
+  textarea,input[type="text"]{width:100%;padding:12px 14px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#f1f5f9;font-family:'Inter',monospace;font-size:.9rem;transition:border-color .3s;resize:vertical}
+  textarea:focus,input[type="text"]:focus{outline:none;border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
+  textarea{min-height:120px}
+  .input-group{margin-bottom:14px}
+  .input-group label{display:block;font-size:.8rem;font-weight:500;color:#94a3b8;margin-bottom:5px}
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;background:#0d9488;color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s}
+  .btn:hover{background:#0f766e;box-shadow:0 4px 16px rgba(13,148,136,.3);transform:translateY(-1px)}
+  .btn-secondary{background:#334155;color:#e2e8f0}
+  .btn-secondary:hover{background:#475569;box-shadow:0 4px 12px rgba(51,65,85,.3)}
+  .btn-sm{padding:6px 14px;font-size:.8rem}
+  .results{margin-top:16px;display:none}
+  .results.show{display:block;animation:fadeIn .3s ease-out}
+  .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+  .stat-card{background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:16px;text-align:center}
+  .stat-card .value{font-size:1.6rem;font-weight:700;color:#f59e0b}
+  .stat-card .label{font-size:.75rem;color:#64748b;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+  .serp-preview{background:#fff;border-radius:10px;padding:16px;margin:12px 0;max-width:600px}
+  .serp-preview .url{color:#006621;font-size:14px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .serp-preview .title{color:#1a0dab;font-size:18px;line-height:1.3;font-weight:400;margin:3px 0;cursor:pointer}
+  .serp-preview .title:hover{text-decoration:underline}
+  .serp-preview .desc{color:#545454;font-size:14px;line-height:1.58;word-wrap:break-word}
+  .serp-preview .date{color:#545454;font-size:14px}
+  .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;font-size:.75rem;font-weight:500}
+  .badge-green{background:rgba(13,148,136,.15);color:#2dd4bf}
+  .badge-yellow{background:rgba(245,158,11,.15);color:#fbbf24}
+  .badge-red{background:rgba(239,68,68,.15);color:#f87171}
+  .badge-blue{background:rgba(59,130,246,.15);color:#60a5fa}
+  .token-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .token{background:#1e293b;padding:4px 10px;border-radius:6px;font-size:.8rem;color:#cbd5e1}
+  .link-row{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#0f172a;border-radius:6px;margin-bottom:4px;font-size:.85rem;flex-wrap:wrap;gap:4px}
+  .link-row .anchor{color:#94a3b8;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .link-row .href{color:#0d9488;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .link-row .nofollow{color:#f87171;font-size:.7rem}
+  .link-row .dofollow{color:#2dd4bf;font-size:.7rem}
+  .progress-bar{height:8px;background:#1e293b;border-radius:999px;overflow:hidden;margin:8px 0}
+  .progress-fill{height:100%;border-radius:999px;transition:width .6s ease}
+  .progress-fill.green{background:linear-gradient(90deg,#0d9488,#2dd4bf)}
+  .progress-fill.yellow{background:linear-gradient(90deg,#d97706,#fbbf24)}
+  .progress-fill.red{background:linear-gradient(90deg,#dc2626,#f87171)}
+  .score-note{font-size:.8rem;color:#64748b;margin-top:4px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.two-col{grid-template-columns:1fr}}
+  ::-webkit-scrollbar{width:6px;height:6px}
+  ::-webkit-scrollbar-track{background:#0f172a}
+  ::-webkit-scrollbar-thumb{background:#334155;border-radius:999px}
+  ::-webkit-scrollbar-thumb:hover{background:#475569}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🔍 SEO Tool Suite</h1>
+  <p>Content Grader · SERP Preview · Keyword Planner · Link Inspector</p>
+</div>
+
+<div class="container">
+  <div class="tab-bar" id="tabBar">
+    <button class="tab-btn active" onclick="switchTab('grader')">📄 Content Grader</button>
+    <button class="tab-btn" onclick="switchTab('serp')">🔎 SERP Preview</button>
+    <button class="tab-btn" onclick="switchTab('keywords')">📊 Keyword Planner</button>
+    <button class="tab-btn" onclick="switchTab('links')">🔗 Link Inspector</button>
+  </div>
+
+  <!-- === TAB 1: Content Grader === -->
+  <div class="tab-content active" id="tab-grader">
+    <div class="card">
+      <h2><span class="icon">📄</span>Content Grader</h2>
+      <p style="color:#64748b;font-size:.85rem;margin-bottom:14px">Paste your content to get readability score, keyword density, heading analysis, and more.</p>
+      <div class="input-group">
+        <label>Target Keyword (optional)</label>
+        <input type="text" id="graderKeyword" placeholder="e.g. password generator" style="max-width:300px">
+      </div>
+      <div class="input-group">
+        <label>Content</label>
+        <textarea id="graderContent" rows="10" placeholder="Paste your article, blog post, or landing page content here..."></textarea>
+      </div>
+      <button class="btn" onclick="gradeContent()">📊 Grade Content</button>
+    </div>
+    <div class="results" id="graderResults">
+      <div class="stat-grid" id="graderStats"></div>
+      <div id="graderDetail"></div>
+    </div>
+  </div>
+
+  <!-- === TAB 2: SERP Preview === -->
+  <div class="tab-content" id="tab-serp">
+    <div class="card">
+      <h2><span class="icon">🔎</span>SERP Preview</h2>
+      <p style="color:#64748b;font-size:.85rem;margin-bottom:14px">See how your page looks in Google search results.</p>
+      <div class="two-col">
+        <div class="input-group">
+          <label>Page Title (50-60 chars recommended)</label>
+          <input type="text" id="serpTitle" placeholder="Your SEO Title Tag" value="">
+        </div>
+        <div class="input-group">
+          <label>Page URL</label>
+          <input type="text" id="serpUrl" placeholder="https://yoursite.com/page/" value="https://example.com/page/">
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Meta Description (150-160 chars recommended)</label>
+        <textarea id="serpDesc" rows="3" placeholder="Your meta description..."></textarea>
+      </div>
+      <div class="input-group" style="display:flex;gap:8px;align-items:center">
+        <input type="checkbox" id="serpDate" checked style="width:16px;height:16px;accent-color:#0d9488">
+        <label for="serpDate" style="margin:0;font-size:.85rem">Show date</label>
+      </div>
+      <button class="btn" onclick="previewSERP()">👁️ Preview</button>
+    </div>
+    <div class="results" id="serpResults">
+      <div class="card">
+        <h2>Google Search Result Preview</h2>
+        <div class="serp-preview" id="serpPreviewBox">
+          <div class="url" id="serpUrlDisplay">https://example.com/page/</div>
+          <div class="title" id="serpTitleDisplay">Page Title Goes Here</div>
+          <div class="desc" id="serpDescDisplay"><span class="date" id="serpDateDisplay">2 May 2026 — </span>Meta description text that describes what the page is about...</div>
+        </div>
+      </div>
+      <div class="card" id="serpScoreCard" style="display:none">
+        <h2>Optimisation Scores</h2>
+        <div id="serpScores"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === TAB 3: Keyword Planner === -->
+  <div class="tab-content" id="tab-keywords">
+    <div class="card">
+      <h2><span class="icon">📊</span>Keyword Planner</h2>
+      <p style="color:#64748b;font-size:.85rem;margin-bottom:14px">Enter a seed keyword to generate semantic variants, questions, and LSI terms.</p>
+      <div class="input-group">
+        <label>Seed Keyword</label>
+        <input type="text" id="kwSeed" placeholder="e.g. password manager" style="max-width:400px">
+      </div>
+      <button class="btn" onclick="planKeywords()">🔍 Generate Keywords</button>
+    </div>
+    <div class="results" id="kwResults">
+      <div class="stat-grid" id="kwStats"></div>
+      <div class="card" id="kwVariantsCard" style="display:none">
+        <h2>Semantic Variants</h2>
+        <div class="token-list" id="kwVariants"></div>
+      </div>
+      <div class="card" id="kwQuestionsCard" style="display:none">
+        <h2>Question-Based Keywords</h2>
+        <div class="token-list" id="kwQuestions"></div>
+      </div>
+      <div class="card" id="kwLSICard" style="display:none">
+        <h2>LSI & Related Terms</h2>
+        <div class="token-list" id="kwLSI"></div>
+      </div>
+      <div class="card" id="kwIntentCard" style="display:none">
+        <h2>Search Intent Ideas</h2>
+        <div id="kwIntent"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === TAB 4: Link Inspector === -->
+  <div class="tab-content" id="tab-links">
+    <div class="card">
+      <h2><span class="icon">🔗</span>Link Inspector</h2>
+      <p style="color:#64748b;font-size:.85rem;margin-bottom:14px">Paste HTML to extract and analyse all links — internal, external, nofollow, follow.</p>
+      <div class="input-group">
+        <label>Your Domain (to classify internal vs external)</label>
+        <input type="text" id="linkDomain" placeholder="yoursite.com" value="trustypassword.com" style="max-width:300px">
+      </div>
+      <div class="input-group">
+        <label>HTML Content</label>
+        <textarea id="linkHtml" rows="10" placeholder="Paste the HTML source of your page here..."></textarea>
+      </div>
+      <button class="btn" onclick="inspectLinks()">🔗 Inspect Links</button>
+    </div>
+    <div class="results" id="linkResults">
+      <div class="stat-grid" id="linkStats"></div>
+      <div id="linkDetail"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  document.querySelector(`.tab-btn[onclick*="${name}"]`).classList.add('active');
+}
+
+// =================== GRADE CONTENT ===================
+function gradeContent() {
+  const text = document.getElementById('graderContent').value.trim();
+  const keyword = document.getElementById('graderKeyword').value.trim().toLowerCase();
+  if (!text) { alert('Paste some content first.'); return; }
+
+  const words = text.split(/\s+/).filter(w => w.length > 0);
+  const wordCount = words.length;
+  const charCount = text.length;
+  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+  const sentenceCount = sentences.length || 1;
+  const avgWordsPerSentence = (wordCount / sentenceCount).toFixed(1);
+
+  // Readability: Flesch-Kincaid approximation
+  const syllables = countSyllables(text);
+  const fre = 206.835 - 1.015 * (wordCount / sentenceCount) - 84.6 * (syllables / wordCount);
+  const readabilityScore = Math.max(0, Math.min(100, Math.round(fre)));
+  let grade;
+  if (readabilityScore >= 80) grade = {label:'Very Easy', cls:'badge-green'};
+  else if (readabilityScore >= 60) grade = {label:'Easy', cls:'badge-green'};
+  else if (readabilityScore >= 40) grade = {label:'Moderate', cls:'badge-yellow'};
+  else if (readabilityScore >= 20) grade = {label:'Difficult', cls:'badge-red'};
+  else grade = {label:'Very Difficult', cls:'badge-red'};
+
+  // Headings
+  const h1s = (text.match(/<h1[^>]*>/gi) || []).length;
+  const h2s = (text.match(/<h2[^>]*>/gi) || []).length;
+  const h3s = (text.match(/<h3[^>]*>/gi) || []).length;
+  const hasH1 = h1s > 0;
+  const hasH2 = h2s > 0;
+
+  // Keyword density
+  let kwDensity = 0;
+  let kwCount = 0;
+  if (keyword) {
+    const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp('\\b' + escaped + '\\b', 'gi');
+    const matches = text.match(regex);
+    kwCount = matches ? matches.length : 0;
+    kwDensity = wordCount > 0 ? ((kwCount / wordCount) * 100) : 0;
+  }
+
+  // Images with alt text
+  const imgTags = text.match(/<img[^>]*>/gi) || [];
+  const imgWithAlt = imgTags.filter(t => /alt\s*=\s*["'][^"']*["']/i.test(t)).length;
+  const imgCount = imgTags.length;
+
+  // Stats grid
+  document.getElementById('graderStats').innerHTML = `
+    <div class="stat-card"><div class="value">${wordCount.toLocaleString()}</div><div class="label">Word Count</div></div>
+    <div class="stat-card"><div class="value">${charCount.toLocaleString()}</div><div class="label">Characters</div></div>
+    <div class="stat-card"><div class="value">${sentenceCount}</div><div class="label">Sentences</div></div>
+    <div class="stat-card"><div class="value">${avgWordsPerSentence}</div><div class="label">Avg Words/Sentence</div></div>
+    <div class="stat-card"><div class="value" style="color:${readabilityScore>=60?'#2dd4bf':readabilityScore>=40?'#fbbf24':'#f87171'}">${readabilityScore}</div><div class="label">Readability Score</div></div>
+    ${keyword ? `<div class="stat-card"><div class="value">${kwCount}</div><div class="label">'${keyword}' mentions</div></div>
+    <div class="stat-card"><div class="value" style="color:${kwDensity>=0.5&&kwDensity<=3?'#2dd4bf':'#fbbf24'}">${kwDensity.toFixed(2)}%</div><div class="label">Keyword Density</div></div>` : ''}
+  `;
+
+  // Detail
+  let detail = `<div class="card"><h2>Readability: ${grade.label}</h2>`;
+  detail += `<div class="progress-bar"><div class="progress-fill ${readabilityScore>=60?'green':readabilityScore>=40?'yellow':'red'}" style="width:${readabilityScore}%"></div></div>`;
+  detail += `<div class="score-note">Flesch Reading Ease: ${readabilityScore}/100 — ${grade.label.toLowerCase()} to read</div></div>`;
+
+  detail += `<div class="card"><h2>Structure Analysis</h2>`;
+  detail += `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px">`;
+  detail += `<span class="badge ${hasH1?'badge-green':'badge-red'}">${hasH1?'✅':'❌'} H1 Tags: ${h1s} ${!hasH1?'(missing!)':''}</span>`;
+  detail += `<span class="badge ${hasH2?'badge-green':'badge-yellow'}">${hasH2?'✅':'⚠️'} H2 Tags: ${h2s} ${!hasH2?'(none!)':''}</span>`;
+  if (h3s > 0) detail += `<span class="badge badge-green">ℹ️ H3 Tags: ${h3s}</span>`;
+  detail += `</div></div>`;
+
+  if (keyword) {
+    const optimal = kwDensity >= 0.5 && kwDensity <= 3;
+    detail += `<div class="card"><h2>Keyword Analysis</h2>`;
+    detail += `<p style="color:#94a3b8;font-size:.9rem">Target: <strong>${keyword}</strong></p>`;
+    detail += `<p style="margin-top:6px">Mentions: <strong>${kwCount}</strong> | Density: <strong>${kwDensity.toFixed(2)}%</strong></p>`;
+    detail += `<div class="progress-bar"><div class="progress-fill ${optimal?'green':'yellow'}" style="width:${Math.min(kwDensity*20,100)}%"></div></div>`;
+    detail += `<div class="score-note">${optimal ? '✅ Optimal density (0.5-3% recommended)' : kwDensity < 0.5 ? '⚠️ Keyword density is low — consider adding more mentions' : '⚠️ Keyword density is high — risk of keyword stuffing'}</div>`;
+    detail += `</div>`;
+  }
+
+  if (imgCount > 0) {
+    detail += `<div class="card"><h2>Images</h2>`;
+    detail += `<p style="color:#94a3b8">Total images: ${imgCount} | With alt text: ${imgWithAlt}/${imgCount}</p>`;
+    detail += `<span class="badge ${imgCount === imgWithAlt ? 'badge-green' : 'badge-yellow'}">${imgCount === imgWithAlt ? '✅ All images have alt text' : `⚠️ ${imgCount - imgWithAlt} image(s) missing alt text`}</span>`;
+    detail += `</div>`;
+  }
+
+  document.getElementById('graderDetail').innerHTML = detail;
+  document.getElementById('graderResults').classList.add('show');
+}
+
+function countSyllables(text) {
+  const words = text.toLowerCase().replace(/[^a-z\s]/g,'').split(/\s+/).filter(w=>w.length>0);
+  let total = 0;
+  for (const w of words) {
+    let count = 0;
+    let prevVowel = false;
+    for (const ch of w) {
+      if ('aeiouy'.includes(ch)) {
+        if (!prevVowel) count++;
+        prevVowel = true;
+      } else { prevVowel = false; }
+    }
+    if (count === 0) count = 1;
+    total += count;
+  }
+  return total;
+}
+
+// =================== SERP PREVIEW ===================
+function previewSERP() {
+  const title = document.getElementById('serpTitle').value.trim() || 'Page Title';
+  const url = document.getElementById('serpUrl').value.trim() || 'https://example.com/';
+  const desc = document.getElementById('serpDesc').value.trim() || '';
+  const showDate = document.getElementById('serpDate').checked;
+
+  document.getElementById('serpTitleDisplay').textContent = title;
+  document.getElementById('serpUrlDisplay').textContent = url;
+  document.getElementById('serpDateDisplay').style.display = showDate ? 'inline' : 'none';
+  document.getElementById('serpDateDisplay').textContent = getRandomDate() + ' — ';
+  document.getElementById('serpDescDisplay').innerHTML = `${showDate ? `<span class="date">${getRandomDate()} — </span>` : ''}${desc || 'Meta description will appear here...'}`;
+
+  // Scores
+  const titleLen = title.length;
+  const descLen = desc.length;
+  const titleOptimal = titleLen >= 50 && titleLen <= 60;
+  const descOptimal = descLen >= 150 && descLen <= 160;
+  const hasKeywordInTitle = true; // can't really check without user providing kw
+  const titleScore = titleOptimal ? 100 : titleLen < 50 ? 70 : titleLen > 60 ? 60 : 80;
+  const descScore = descOptimal ? 100 : descLen < 150 ? descLen > 0 ? 65 : 0 : descLen > 160 ? 55 : 80;
+
+  let scores = '';
+  scores += `<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:.85rem"><span>Title Length: <strong>${titleLen} chars</strong></span><span class="badge ${titleOptimal?'badge-green':'badge-yellow'}">${titleOptimal?'✅ Optimal':'⚠️ Adjust'}</span></div>`;
+  scores += `<div class="progress-bar"><div class="progress-fill ${titleLen>=50&&titleLen<=60?'green':'yellow'}" style="width:${Math.min((titleLen/60)*100,100)}%"></div></div>`;
+  scores += `<div class="score-note">Recommended: 50-60 chars. ${titleLen<50?'Title may be truncated in search results.':titleLen>60?'Title may be truncated on mobile.':''}</div></div>`;
+
+  scores += `<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:.85rem"><span>Description Length: <strong>${descLen} chars</strong></span><span class="badge ${descOptimal?'badge-green':'descLen>0?'badge-yellow':'badge-red'}">${descLen===0?'❌ Missing':descOptimal?'✅ Optimal':'⚠️ Adjust'}</span></div>`;
+  if (descLen > 0) {
+    scores += `<div class="progress-bar"><div class="progress-fill ${descLen>=150&&descLen<=160?'green':descLen>0?'yellow':'red'}" style="width:${Math.min((descLen/160)*100,100)}%"></div></div>`;
+    scores += `<div class="score-note">Recommended: 150-160 chars. ${descLen<150?'Description may be too short.':descLen>160?'Description may be truncated.':''}</div>`;
+  }
+  scores += `</div>`;
+
+  document.getElementById('serpScores').innerHTML = scores;
+  document.getElementById('serpScoreCard').style.display = 'block';
+  document.getElementById('serpResults').classList.add('show');
+}
+
+function getRandomDate() {
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const d = new Date();
+  const offset = Math.floor(Math.random() * 30);
+  d.setDate(d.getDate() - offset);
+  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+// =================== KEYWORD PLANNER ===================
+function planKeywords() {
+  const seed = document.getElementById('kwSeed').value.trim().toLowerCase();
+  if (!seed) { alert('Enter a seed keyword.'); return; }
+
+  const words = seed.split(/\s+/);
+  const mainWord = words[words.length - 1];
+  const prefix = words.slice(0, -1).join(' ');
+
+  // Generate semantic variants
+  const prefixes = ['best','top','cheap','free','online','secure','professional','quick','easy','ultimate','advanced','simple','automated','smart','reliable'];
+  const suffixes = ['guide','tool','checker','generator','tips','examples','review','calculator','ideas','strategies','best practices','tutorial','software','online','service','comparison'];
+  const modifiers = ['for beginners','for experts','2026','for small business','for enterprise','step by step','vs alternatives','near me','that works','without signup'];
+
+  const semanticVariants = new Set();
+  semanticVariants.add(seed);
+
+  // prefix + seed
+  for (const p of prefixes) {
+    if (Math.random() > 0.4) semanticVariants.add(`${p} ${seed}`);
+  }
+  // seed + suffix
+  for (const s of suffixes) {
+    if (Math.random() > 0.5) semanticVariants.add(`${seed} ${s}`);
+  }
+  // modifier variants
+  for (const m of modifiers) {
+    if (Math.random() > 0.6) semanticVariants.add(`${seed} ${m}`);
+  }
+
+  // Questions
+  const qWords = ['what','how','why','when','where','which','can','does','is','are'];
+  const qTemplates = [
+    `what is ${seed}`,
+    `how to ${seed}`,
+    `how does ${seed} work`,
+    `why ${seed} is important`,
+    `what are the best ${mainWord} ${words.length > 1 ? words.slice(0, -1).join(' ') : 'tools'}`,
+    `how to choose ${seed}`,
+    `what is the difference between ${seed} and ${['alternatives','competitors','traditional methods','other options','manual approach'][Math.floor(Math.random()*5)]}`,
+    `is ${seed} worth it`,
+    `what are the benefits of ${seed}`,
+    `how to get started with ${seed}`,
+    `common mistakes with ${seed}`,
+    `what features should ${seed} have`,
+    `how to ${prefix ? prefix + ' ' : ''}optimize ${mainWord} for better results`,
+    `${seed} for dummies`,
+    `top ${seed} mistakes to avoid`
+  ];
+
+  // LSI / Related terms
+  const lsiTerms = [
+    `${mainWord} strategy`, `${mainWord} optimization`, `${mainWord} analysis`,
+    `${mainWord} metrics`, `${mainWord} performance`, `${mainWord} management`,
+    `${mainWord} solutions`, `${mainWord} platform`, `${mainWord} automation`,
+    `${mainWord} checklist`, `${mainWord} framework`, `${mainWord} methodology`,
+    `${mainWord} trends`, `${mainWord} research`, `${mainWord} case study`,
+    `${mainWord} roi`, `${mainWord} audit`, `${mainWord} scoring`,
+    `${mainWord} benchmark`, `${mainWord} comparison`, `${mainWord} integration`
+  ];
+
+  // Search intent groupings
+  const intents = {
+    'Informational (learn)': [`what is ${seed}`,`${seed} guide`,`${seed} explained`,`how ${seed} works`,`${seed} examples`,`benefits of ${seed}`],
+    'Commercial (compare)': [`${seed} vs alternatives`,`best ${seed}`,`${seed} review`,`${seed} comparison`,`${seed} pricing`,`${seed} pros and cons`],
+    'Transactional (buy)': [`${seed} discount`,`${seed} coupon`,`buy ${seed}`,`${seed} deal`,`${seed} software`,`${seed} pricing plans`],
+    'Navigational (find)': [`${seed} login`,`${seed} app`,`${seed} website`,`${seed} support`,`${seed} download`]
+  };
+
+  // Display
+  const sortedVariants = [...semanticVariants].filter(v => v !== seed).sort(() => Math.random() - 0.5).slice(0, 20);
+  const questions = [...new Set(qTemplates)].slice(0, 12);
+  const lsi = [...new Set(lsiTerms)].sort(() => Math.random() - 0.5).slice(0, 15);
+
+  document.getElementById('kwStats').innerHTML = `
+    <div class="stat-card"><div class="value">${seed}</div><div class="label">Seed Keyword</div></div>
+    <div class="stat-card"><div class="value">${sortedVariants.length + 1}</div><div class="label">Total Variants</div></div>
+    <div class="stat-card"><div class="value">${questions.length}</div><div class="label">Question Ideas</div></div>
+    <div class="stat-card"><div class="value">${lsi.length}</div><div class="label">LSI Terms</div></div>
+  `;
+
+  document.getElementById('kwVariants').innerHTML = [seed, ...sortedVariants].map(v => `<span class="token">${v}</span>`).join('');
+  document.getElementById('kwVariantsCard').style.display = 'block';
+
+  document.getElementById('kwQuestions').innerHTML = questions.map(q => `<span class="token">${q}?</span>`).join('');
+  document.getElementById('kwQuestionsCard').style.display = 'block';
+
+  document.getElementById('kwLSI').innerHTML = lsi.map(t => `<span class="token">${t}</span>`).join('');
+  document.getElementById('kwLSICard').style.display = 'block';
+
+  let intentHtml = '';
+  for (const [intent, kws] of Object.entries(intents)) {
+    intentHtml += `<div style="margin-bottom:12px"><strong style="color:#f1f5f9;font-size:.9rem">${intent}</strong>`;
+    intentHtml += `<div class="token-list">${kws.slice(0,5).map(k => `<span class="token">${k}</span>`).join('')}</div></div>`;
+  }
+  document.getElementById('kwIntent').innerHTML = intentHtml;
+  document.getElementById('kwIntentCard').style.display = 'block';
+
+  document.getElementById('kwResults').classList.add('show');
+}
+
+// =================== LINK INSPECTOR ===================
+function inspectLinks() {
+  const html = document.getElementById('linkHtml').value;
+  const domain = document.getElementById('linkDomain').value.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/\/.*$/,'');
+  if (!html) { alert('Paste HTML content.'); return; }
+
+  // Parse links using DOM parser
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+  const links = doc.querySelectorAll('a[href]');
+
+  let total = 0, internal = 0, external = 0, nofollow = 0, dofollow = 0;
+  const linkData = [];
+
+  for (const a of links) {
+    const href = a.getAttribute('href').trim();
+    if (!href || href.startsWith('#') || href.startsWith('javascript:')) continue;
+    total++;
+    const rel = (a.getAttribute('rel') || '').toLowerCase();
+    const isNofollow = rel.includes('nofollow');
+    const anchor = (a.textContent || '').trim().substring(0, 80);
+    const isInternal = href.includes(domain) || href.startsWith('/') || href.startsWith('./') || href.startsWith('../') || href.startsWith('#') || href.startsWith('?');
+
+    if (isInternal) internal++; else external++;
+    if (isNofollow) nofollow++; else dofollow++;
+
+    linkData.push({ href, anchor: anchor || '(no text)', isInternal, isNofollow });
+  }
+
+  // Stats
+  document.getElementById('linkStats').innerHTML = `
+    <div class="stat-card"><div class="value">${total}</div><div class="label">Total Links</div></div>
+    <div class="stat-card"><div class="value">${internal}</div><div class="label">Internal</div></div>
+    <div class="stat-card"><div class="value">${external}</div><div class="label">External</div></div>
+    <div class="stat-card"><div class="value">${nofollow}</div><div class="label">Nofollow</div></div>
+    <div class="stat-card"><div class="value">${dofollow}</div><div class="label">Dofollow</div></div>
+  `;
+
+  // Breakdown
+  let detail = `<div class="card"><h2>Link Breakdown</h2>`;
+  if (total === 0) {
+    detail += `<p style="color:#64748b">No links found.</p>`;
+  } else {
+    for (const l of linkData) {
+      const type = l.isInternal ? '🔗 Internal' : '🌐 External';
+      const relClass = l.isNofollow ? 'nofollow' : 'dofollow';
+      const relLabel = l.isNofollow ? 'nofollow' : 'dofollow';
+      detail += `<div class="link-row">`;
+      detail += `<span class="anchor">${l.anchor}</span>`;
+      detail += `<span class="href">${l.href.substring(0,60)}${l.href.length>60?'...':''}</span>`;
+      detail += `<span><span class="badge badge-blue">${type}</span> <span class="${relClass}">${relLabel}</span></span>`;
+      detail += `</div>`;
+    }
+  }
+  detail += `</div>`;
+
+  // Ratio insights
+  if (total > 0) {
+    detail += `<div class="card"><h2>Insights</h2>`;
+    const internalPct = ((internal/total)*100).toFixed(0);
+    const nofollowPct = ((nofollow/total)*100).toFixed(0);
+    detail += `<p style="color:#94a3b8;font-size:.9rem">`;
+    detail += `Internal/External ratio: ${internalPct}% / ${100-internalPct}% — `;
+    detail += internalPct >= 60 ? '✅ Good internal linking structure.' : '⚠️ Consider adding more internal links.';
+    detail += `<br>Nofollow/Dofollow ratio: ${nofollowPct}% / ${100-nofollowPct}% — `;
+    detail += nofollowPct <= 30 ? '✅ Most link equity flows through dofollow links.' : '⚠️ High proportion of nofollow links — check if intentional.';
+    detail += `</p></div>`;
+  }
+
+  document.getElementById('linkDetail').innerHTML = detail;
+  document.getElementById('linkResults').classList.add('show');
+}
+</script>
+
+</body>
+</html>
