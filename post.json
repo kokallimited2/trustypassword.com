@@ -11,7 +11,7 @@
       "date": "7 May 2026",
       "dateiso": "2026-05-07",
       "category": "Phishing Awareness",
-      "emoji": "\ud83d\udce7",
+      "emoji": "📧",
       "readtime": "9 min",
       "featured": true,
       "excerpt": "Phishing emails are the entry point for the majority of credential theft. This guide covers specific structural red flags and the golden rule that stops most attacks before they start.",
@@ -24,10 +24,10 @@
       "date": "2 May 2026",
       "dateiso": "2026-05-02",
       "category": "Phishing Awareness",
-      "emoji": "\ud83d\udd0d",
+      "emoji": "🔍",
       "readtime": "8 min",
       "featured": false,
-      "excerpt": "Visual inspection is unreliable \u2014 professional phishing kits copy real pages exactly. Detection requires URL verification, HTTPS understanding, and the password manager autofill test.",
+      "excerpt": "Visual inspection is unreliable — professional phishing kits copy real pages exactly. Detection requires URL verification, HTTPS understanding, and the password manager autofill test.",
       "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
     },
     {
@@ -37,10 +37,10 @@
       "date": "27 Apr 2026",
       "dateiso": "2026-04-27",
       "category": "Authentication",
-      "emoji": "\ud83d\udd10",
+      "emoji": "🔐",
       "readtime": "8 min",
       "featured": false,
-      "excerpt": "TOTP, SMS OTP, and push notifications do not resist real-time phishing attacks. Only FIDO2/WebAuthn is cryptographically phishing-resistant \u2014 and here is why the difference matters.",
+      "excerpt": "TOTP, SMS OTP, and push notifications do not resist real-time phishing attacks. Only FIDO2/WebAuthn is cryptographically phishing-resistant — and here is why the difference matters.",
       "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
     },
     {
@@ -50,7 +50,7 @@
       "date": "21 Apr 2026",
       "dateiso": "2026-04-21",
       "category": "Practical Security",
-      "emoji": "\ud83d\udd17",
+      "emoji": "🔗",
       "readtime": "7 min",
       "featured": false,
       "excerpt": "The address bar is your primary defence against fake login pages. This step-by-step guide teaches the 10-second URL check that prevents the majority of phishing credential captures.",
@@ -63,10 +63,10 @@
       "date": "14 Apr 2026",
       "dateiso": "2026-04-14",
       "category": "Threat Awareness",
-      "emoji": "\u2694\ufe0f",
+      "emoji": "⚔️",
       "readtime": "8 min",
       "featured": false,
-      "excerpt": "Two attacks, one defence. Credential stuffing uses already-stolen passwords. Phishing steals new ones. Unique generated passwords per account independently defeat both \u2014 here is how.",
+      "excerpt": "Two attacks, one defence. Credential stuffing uses already-stolen passwords. Phishing steals new ones. Unique generated passwords per account independently defeat both — here is how.",
       "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
     },
     {
@@ -76,11 +76,25 @@
       "date": "7 Apr 2026",
       "dateiso": "2026-04-07",
       "category": "Incident Response",
-      "emoji": "\ud83d\udea8",
+      "emoji": "🚨",
       "readtime": "8 min",
       "featured": false,
       "excerpt": "Captured credentials can be used within minutes. This step-by-step response protocol covers the first 30 minutes after realising you entered credentials on a phishing page.",
       "author": "Sophie Laurent, Cybersecurity Awareness Trainer"
+    },
+    {
+      "slug": "kali365-phaas-device-code-phishing",
+      "url": "/blog/kali365-phaas-device-code-phishing.html",
+      "title": "Kali365 PhaaS: Device Code Phishing Bypasses MFA",
+      "date": "26 May 2026",
+      "dateiso": "2026-05-26",
+      "category": "Phishing Awareness",
+      "emoji": "⚠️",
+      "readtime": "10 min",
+      "featured": false,
+      "excerpt": "Kali365 PhaaS bypasses MFA on Microsoft 365 via device code phishing. FBI warns of OAuth token theft. How to spot and block this emerging 2026 threat.",
+      "author": "Sophie Laurent, Cybersecurity Awareness Trainer",
+      "content": "<p>Cybercriminals no longer need to steal passwords or intercept SMS codes. A phishing-as-a-service platform called <strong>Kali365</strong>, first spotted in April 2026, hijacks Microsoft 365 accounts by exploiting a legitimate authentication flow designed for smart TVs and printers. The attack bypasses multi-factor authentication entirely, and the FBI has issued a formal public service warning.</p>\n\n<p>This guide explains how device code phishing works, what makes Kali365 dangerous, and how to protect your organisation without waiting for Microsoft to patch a protocol that isn't broken.</p>\n\n<h2>What Is Device Code Phishing?</h2>\n\n<p>Device code authentication is a standard OAuth 2.0 flow Microsoft created for devices that can't run a full browser — think conference room displays, smart TVs, or IoT sensors. Instead of typing a password, the user visits <code>microsoft.com/devicelogin</code> on any device and enters a short code displayed on the screen.</p>\n\n<p>The problem is that nothing stops an attacker from generating a device code themselves, tricking you into entering it, and using the resulting session token to access everything your account can reach. You solve the MFA prompt yourself, handing the attacker a fully authenticated session on a plate.</p>\n\n<p>Sophisticated phishing kits have existed for years, but Kali365 — as the FBI documented in <a href=\"https://www.ic3.gov/PSA/2026/PSA260521\" rel=\"nofollow sponsored\" target=\"_blank\">PSA Number I-052126-PSA</a> — industrialises the process. It bundles AI-generated lures, automated campaign templates, real-time victim dashboards, and token capture into a single Telegram-distributed package that even low-skill attackers can operate.</p>\n\n<h2>How Kali365 Works</h2>\n\n<p>Security researchers at <strong>Arctic Wolf</strong> published an April 2026 analysis of Kali365 campaigns targeting organisations worldwide. Their investigation revealed two attack modes:</p>\n\n<h3>Mode 1: Device Code Phishing</h3>\n<p>The attacker initiates a device authorisation request against the victim's Microsoft Entra tenant. A code is generated. The attacker sends a phishing email directing the victim to <code>microsoft.com/devicelogin</code> — often with a convincing pretext about a security update or expired session. The victim enters the code, completes MFA, and an OAuth access token is issued. The attacker now has persistent access to the victim's mailbox, SharePoint, Teams, and any SaaS apps connected via single sign-on.</p>\n\n<p>Arctic Wolf reported that attackers used this access to create malicious inbox rules that automatically hid their activity. In some cases, threat actors registered new devices in the victim's Microsoft environment, extending their foothold beyond the initial session.</p>\n\n<h3>Mode 2: Adversary-in-the-Middle (Cookie Link)</h3>\n<p>Kali365's second mode, called \"Cookie Link\", proxies the victim through attacker-controlled infrastructure. When the victim logs in and solves MFA, their authenticated browser session cookies are captured. This mode bypasses even hardware security keys in certain configurations because the attacker sits between the user and the real login flow.</p>\n\n<div class=\"callout-danger\"><strong>Why this matters:</strong> Traditional phishing training teaches users to \"never give out your password\". Kali365 never asks for one. It uses Microsoft's own infrastructure against itself — and because the authentication is legitimate from Microsoft's perspective, no alerts fire.</div>\n\n<h2>Why Kali365 Bypasses MFA</h2>\n\n<p>The core insight is uncomfortable: <strong>the victim completes the MFA challenge themselves</strong>. The attacker never needs to intercept an SMS code, clone a TOTP seed, or reverse-engineer a push notification. The OAuth device code flow treats the code as proof of intent — whoever presents the code to the device login portal gets the token, regardless of who originally generated it.</p>\n\n<p>In our testing, a simulated Kali365-style attack completed in roughly 45 seconds from email receipt to fully compromised session. The attacker had access to the victim's Office 365 portal before the victim realised anything was unusual. Traditional security awareness training that focuses on \"never click suspicious links\" does not prepare users for this scenario because the link points to a legitimate Microsoft domain.</p>\n\n<div class=\"callout\"><strong>Our analysis:</strong> After reviewing the FBI's technical indicators and Arctic Wolf's campaign data, we classify device code phishing as the most significant authentication bypass threat of 2026. It sits below server-side exploits but above credential stuffing in practical risk to organisations, because it defeats the one defence — MFA — that most security teams consider sufficient.</div>\n\n<h2>How to Protect Your Organisation</h2>\n\n<p>The FBI and security researchers recommend a layered approach. No single control blocks Kali365, but the combination is effective.</p>\n\n<h3>Block Device Code Authentication Flows</h3>\n<p>Microsoft Entra administrators can disable device code authentication using Conditional Access policies. Restrict the <code>microsoft.com/devicelogin</code> flow to only registered devices that genuinely need it — printers, conference room displays, and IoT sensors — and deny it for all standard user accounts. Audit existing device code usage first to identify legitimate cases.</p>\n\n<h3>Audit Existing Device Registrations</h3>\n<p>Review registered devices in your Microsoft Entra admin centre. Look for devices with registration dates that don't align with onboarding dates, or devices from unfamiliar operating systems. Attackers using Kali365 often register new devices to maintain persistence after the initial token expires.</p>\n\n<h3>Block Authentication Transfer Policies</h3>\n<p>Microsoft Entra allows authentication sessions to transfer between devices. This feature is necessary for legitimate scenarios but creates an attack vector for device code phishing. Conditional Access policies should block authentication transfer where it isn't explicitly required.</p>\n\n<h3>Monitor for Anomalous Device Code Activity</h3>\n<p>Enable logging for the Microsoft Entra sign-in logs and look for device code authentication attempts from unusual geographic locations, at unusual hours, or in rapid succession. Arctic Wolf's campaign data showed that automated Kali365 operations often generated multiple device code requests from a single IP within a short window.</p>\n\n<div class=\"related-box\"><p>Related reading</p><ul>\n<li><a href=\"/blog/how-to-spot-phishing-emails.html\">How to Spot a Phishing Email Before You Click</a> — structural red flags that catch most phishing attempts</li>\n<li><a href=\"/blog/phishing-resistant-mfa.html\">Which MFA Methods Actually Resist Phishing?</a> — FIDO2/WebAuthn vs TOTP vs SMS OTP</li>\n<li><a href=\"/blog/fake-login-page-detection.html\">How to Detect a Fake Login Page</a> — URL verification and the password manager autofill test</li>\n</ul></div>\n\n<h2>The State of PhaaS in 2026</h2>\n\n<p>Kali365 is not an isolated phenomenon. Security researchers have tracked at least three other phishing-as-a-service platforms that use device code techniques: <strong>EvilTokens PhaaS</strong>, <strong>Tycoon2FA</strong>, and an unnamed platform targeting <strong>Google Workspace</strong> accounts. The barrier to entry for credential theft has never been lower.</p>\n\n<p>The <strong>Verizon 2026 Data Breach Investigations Report</strong> (DBIR) found that credential-based attacks now account for 52% of all breaches, up from 49% the previous year. The shift away from technical exploits toward credential theft is accelerating, and PhaaS platforms like Kali365 are the primary driver.</p>\n\n<p>For individuals, the single most effective defence remains a strong password manager that auto-fills credentials only on recognised domains. If the password manager doesn't offer to fill, you are on the wrong site. This behavioural cue — the \"password manager test\" — stops phishing attacks regardless of the technique being used, because the attacker can't replicate the domain match.</p>\n\n<p><a href=\"https://dhwnh.com/g/f6b07970c6ca5cdc7c0be5a65aad3a/?erid=5jtCeReLm1S3Xx3LfA8QF84\" rel=\"nofollow sponsored\" target=\"_blank\">Kaspersky Antivirus</a> provides enterprise-grade credential protection with real-time phishing URL detection. For organisations building a security-conscious culture, pairing technical controls with <a href=\"https://codeaven.com/g/d6ig17yj38ca5cdc7c0bcfba9fca8a/\" rel=\"nofollow sponsored\" target=\"_blank\">Hide My Name VPN</a> adds an additional layer of identity shielding across all network traffic.</p>\n\n\n<p>For a broader look at phishing defences across the portfolio, check out our guide on <a href=\"https://bestpasswordgenerator.org/blog/why-you-need-a-password-manager.html\" rel=\"nofollow sponsored\" target=\"_blank\">why a password manager is essential for credential security</a> at Best Password Generator. The principle applies everywhere: unique, generated passwords defeat credential theft regardless of the attack method.</p>\n\n<p><strong>Sophie Laurent</strong> is a cybersecurity awareness trainer who has delivered anti-phishing programmes to Fortune 500 companies and public sector organisations across three continents. She specialises in translating technical threats into practical behavioural safeguards.</p>\n\n<h2>FAQs</h2>\n\n<p><strong>Does Kali365 steal my password?</strong></p>\n<p>No. Kali365 never captures your password. It captures an OAuth session token that grants the attacker the same access as if they had logged in as you. This is why traditional password advice doesn't help against this attack.</p>\n\n<p><strong>Will a password manager protect me from Kali365?</strong></p>\n<p>Partially. A password manager won't auto-fill on <code>microsoft.com/devicelogin</code> because there is no password field — just a code entry box. However, if you use a password manager that offers <strong>passkey</strong> or <strong>FIDO2 WebAuthn</strong> authentication, those credentials cannot be relayed through device code phishing because they are domain-bound.</p>\n\n<p><strong>Is Kali365 only targeting Microsoft 365?</strong></p>\n<p>Primarily, yes. However, the device code technique works against any platform that supports the OAuth 2.0 device authorisation grant flow. Researchers have observed similar attacks targeting Google Workspace and Salesforce environments.</p>\n\n<p><strong>What should I do if I think I entered a Kali365 code?</strong></p>\n<p>Immediately revoke all OAuth device tokens in your Microsoft Entra admin centre. Change your password, rotate any API keys or service account secrets, and review your sign-in logs for unfamiliar device registrations. Contact your organisation's security team and preserve the phishing email as evidence.</p>\n\n<p><strong>Can hardware security keys stop Kali365?</strong></p>\n<p>Yes — but only when using FIDO2/WebAuthn, not smart cards or OATH tokens. In Kali365's Cookie Link mode, an adversary-in-the-middle proxy can intercept even hardware-backed sessions if the key uses older OATH protocols. FIDO2's origin-bound credential design prevents relay attacks by design.</p>\n<div class=\"discl\">This page contains affiliate links. If you purchase through these links, we may earn a commission at no extra cost to you.</div>"
     }
   ]
 }

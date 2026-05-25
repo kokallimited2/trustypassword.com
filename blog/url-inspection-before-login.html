@@ -1,198 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>How to Inspect a URL Before Entering Your Password | Trusty Password</title>
-<meta name="description" content="URL inspection is the single most reliable defence against fake login pages. This step-by-step guide teaches you to identify the real domain in any URL before entering credentials anywhere.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Inspect a URL Before Entering Your Password</title>
+<meta name="description" content="The address bar is your primary defence against fake login pages. This step-by-step guide teaches the 10-second URL check that prevents the majority of phi">
 <link rel="canonical" href="https://trustypassword.com/blog/url-inspection-before-login.html">
-<meta property="og:title" content="How to Inspect a URL Before Entering Your Password"><meta property="og:description" content="URL inspection is the single most reliable defence against fake login pages. This step-by-step guide teaches you to identify the real domain in any URL before entering credentials anywhere.">
-<meta property="og:image" content="https://trustypassword.com/assets/img/og-url-inspection-before-login.jpg">
-<meta property="og:type" content="article"><meta property="og:url" content="https://trustypassword.com/blog/url-inspection-before-login.html">
+<base href="/">
+<meta property="og:title" content="How to Inspect a URL Before Entering Your Password">
+<meta property="og:description" content="The address bar is your primary defence against fake login pages. This step-by-step guide teaches the 10-second URL check that prevents the majority of phi">
+<meta property="og:url" content="https://trustypassword.com/blog/url-inspection-before-login.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://trustypassword.com/og-image.png">
 <meta property="article:published_time" content="2026-04-21">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='8' fill='%23f8fafc'/><text x='4' y='28' font-size='22'>&#x1F6E1;&#xFE0F;</text></svg>"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to Inspect a URL Before Entering Your Password", "datePublished": "2026-04-21", "dateModified": "2026-04-21", "author": {"@type": "Person", "name": "Sophie Laurent", "jobTitle": "Cybersecurity Awareness Trainer"}, "publisher": {"@type": "Organization", "name": "Trusty Password", "url": "https://trustypassword.com/"}, "description": "URL inspection is the single most reliable defence against fake login pages. This step-by-step guide teaches you to identify the real domain in any URL before entering credentials anywhere.", "url": "https://trustypassword.com/blog/url-inspection-before-login.html", "articleSection": "Practical Security", "keywords": "URL inspection, phishing detection, domain verification, browser security, HTTPS", "wordCount": "1400"}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://trustypassword.com/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://trustypassword.com/blog.html"}, {"@type": "ListItem", "position": 3, "name": "How to Inspect a URL Before Entering Your Password", "item": "https://trustypassword.com/blog/url-inspection-before-login.html"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I find the actual domain in a complex URL?","acceptedAnswer":{"@type":"Answer","text":"The domain is the part immediately before the first single forward slash after the protocol (https://). To find the root domain, read from right to left: find the top-level domain (.com, .co.uk, .org), then the segment before it — that is the root domain. In "mail.accounts.google.com/signin/v2", the root domain is "google.com". In "google.com.accounts.mail.verify.net/signin", the root domain is "verify.net" — a phishing site despite "google.com" appearing in the URL."}},{"@type":"Question","name":"What does the browser address bar show me and what does it hide?","acceptedAnswer":{"@type":"Answer","text":"Modern browsers simplify URLs: Chrome and Edge may hide "www.", some show only the root domain by default. Click the address bar to see the full URL. Most browsers now colour or bold the root domain to help you identify it. The padlock icon indicates HTTPS encryption — it does not verify the site's legitimacy. Always read the root domain, not the display name or page title."}},{"@type":"Question","name":"How can a URL contain a real company name and still be phishing?","acceptedAnswer":{"@type":"Answer","text":"The path component of a URL (after the first /) can contain any text. So "phishing.com/google.com/login" is a phishing site at "phishing.com" with a path that includes "google.com". Similarly, subdomains can be anything: "google.com.phishing.net" has a subdomain of "google.com" but the root domain is "phishing.net". The root domain — and only the root domain — determines whose server you are connecting to."}},{"@type":"Question","name":"What are URL shorteners and why are they risky before login pages?","acceptedAnswer":{"@type":"Answer","text":"URL shorteners (bit.ly, tinyurl, t.co, etc.) obscure the destination URL. When following a shortened URL to a login page, expand it first using a URL expander service (checkshorturl.com, urlex.org) to see the real destination before clicking. Never enter credentials on a page reached via an unexpanded shortened URL — you cannot verify the destination domain."}},{"@type":"Question","name":"What is certificate transparency and can it help verify a site?","acceptedAnswer":{"@type":"Answer","text":"Certificate Transparency (CT) is a public log of all TLS certificates issued. Sites like crt.sh allow you to see all certificates ever issued for a domain. While this is a useful research tool for security professionals, it is not a practical real-time verification method for general users. The domain check remains the most reliable and accessible method. If you want deeper verification for a high-value site, CT logs can confirm whether the certificate was issued to the organisation you expect."}}]}</script>
-<style>
-:root{
-  --bg:#f8fafc;--bg2:#f1f5f9;--bg3:#e2e8f0;
-  --card:#ffffff;--card2:#f8fafc;--card3:#f1f5f9;
-  --p:#0d9488;--pd:#0f766e;--pl:rgba(13,148,136,.08);--pll:rgba(13,148,136,.05);
-  --danger:#dc2626;--dangerl:rgba(220,38,38,.08);--dangerd:#b91c1c;
-  --ok:#16a34a;--okl:rgba(22,163,74,.08);
-  --warn:#d97706;--warnl:rgba(217,119,6,.08);
-  --t:#0f172a;--t2:#1e293b;--t3:#334155;--t4:#475569;--t5:#64748b;
-  --bd:#e2e8f0;--bd2:#cbd5e1;
-  --rad:10px;--radl:16px;--rads:6px;
-  --sh:0 1px 8px rgba(15,23,42,.07),0 1px 3px rgba(15,23,42,.04);
-  --shp:0 8px 32px rgba(13,148,136,.15)
+<meta property="article:author" content="Sophie Laurent, Cybersecurity Awareness Trainer">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Inspect a URL Before Entering Your Password">
+<meta name="twitter:description" content="The address bar is your primary defence against fake login pages. This step-by-step guide teaches the 10-second URL check that prevents the majority of phi">
+<meta name="twitter:image" content="https://trustypassword.com/og-image.png">
+<meta property="article:modified_time" content="2026-04-21">
+<meta property="article:section" content="Practical Security">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://trustypassword.com/#organization",
+      "name": "Trusty Password",
+      "url": "https://trustypassword.com/",
+      "sameAs": [
+        "https://twitter.com/"
+      ],
+      "knowsAbout": [
+        "password security",
+        "cybersecurity"
+      ],
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://trustypassword.com/#website",
+      "url": "https://trustypassword.com/",
+      "name": "Trusty Password",
+      "publisher": {
+        "@id": "https://trustypassword.com/#organization"
+      },
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://trustypassword.com/?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://trustypassword.com/#webapp",
+      "name": "Trusty Password",
+      "url": "https://trustypassword.com/",
+      "applicationCategory": "SecurityApplication",
+      "operatingSystem": "All",
+      "publisher": {
+        "@id": "https://trustypassword.com/#organization"
+      }
+    },
+    {
+      "@type": "WebAPI",
+      "@id": "https://trustypassword.com/#webapi",
+      "name": "Trusty Password API",
+      "url": "https://trustypassword.com/",
+      "description": "Generate secure passwords programmatically",
+      "potentialAction": [
+        {
+          "@type": "GenerateAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://trustypassword.com/?length=16&count=1"
+          }
+        }
+      ],
+      "publisher": {
+        "@id": "https://trustypassword.com/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://trustypassword.com/#author",
+      "name": "Sophie Laurent, Cybersecurity Awareness Trainer",
+      "jobTitle": "Cybersecurity Researcher",
+      "url": "https://trustypassword.com/about.html",
+      "sameAs": [
+        "https://trustypassword.com/about.html"
+      ],
+      "knowsAbout": [
+        "password security",
+        "NIST guidelines",
+        "cryptography",
+        "cybersecurity"
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://trustypassword.com/blog/url-inspection-before-login.html#article",
+      "headline": "How to Inspect a URL Before Entering Your Password",
+      "description": "The address bar is your primary defence against fake login pages. This step-by-step guide teaches the 10-second URL check that prevents the majority of phi",
+      "image": "https://trustypassword.com/og-image.png",
+      "author": {
+        "@id": "https://trustypassword.com/#author"
+      },
+      "publisher": {
+        "@id": "https://trustypassword.com/#organization"
+      },
+      "isPartOf": {
+        "@id": "https://trustypassword.com/#website"
+      },
+      "datePublished": "2026-04-21",
+      "dateModified": "2026-04-21",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://trustypassword.com/blog/url-inspection-before-login.html"
+      },
+      "wordCount": "0",
+      "inLanguage": "en-US",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "h1",
+          ".callout"
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://trustypassword.com/blog/url-inspection-before-login.html#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://trustypassword.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://trustypassword.com/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to Inspect a URL Before Entering Your Password",
+          "item": "https://trustypassword.com/blog/url-inspection-before-login.html"
+        }
+      ]
+    }
+  ]
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--t);line-height:1.7;font-size:15px}
-a{color:var(--p);text-decoration:none}a:hover{color:var(--pd)}
-strong{color:var(--t2);font-weight:700}
-code{font-family:'JetBrains Mono',monospace;font-size:.8em;background:var(--pl);color:var(--pd);padding:2px 7px;border-radius:var(--rads);border:1px solid rgba(13,148,136,.2)}
-pre{background:var(--bg2);border:1px solid var(--bd);border-left:3px solid var(--p);padding:14px 16px;overflow-x:auto;font-size:12px;color:var(--t3);line-height:1.7;margin:14px 0;font-family:'JetBrains Mono',monospace;border-radius:0 var(--rads) var(--rads) 0}
-#ck{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--bd);z-index:9999;display:none;padding:11px 20px;box-shadow:0 -2px 12px rgba(15,23,42,.08)}
-.cki{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
-#ck p{font-size:13px;color:var(--t4);flex:1}#ck a{color:var(--p);font-weight:600}
-.ckb{display:flex;gap:6px}
-.ckac{background:var(--p);color:#fff;border:none;padding:7px 14px;border-radius:var(--rad);cursor:pointer;font-size:13px;font-weight:600;font-family:inherit}
-.ckdc{background:var(--card2);color:var(--t4);border:1px solid var(--bd);padding:7px 11px;border-radius:var(--rad);cursor:pointer;font-size:13px;font-family:inherit;font-weight:500}
-header{background:var(--card);border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(15,23,42,.06)}
-.hi{max-width:1160px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:62px}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-ico{font-size:22px;line-height:1}
-.logo-txt{font-size:15px;font-weight:700;color:var(--t);line-height:1.2}
-.logo-txt strong{color:var(--p)}.logo-txt small{display:block;font-size:10px;color:var(--t4);font-weight:500}
-nav{display:flex;align-items:center;gap:2px}
-nav a{color:var(--t3);text-decoration:none;padding:7px 13px;border-radius:var(--rad);font-size:14px;font-weight:500;transition:all .15s}
-nav a:hover{background:var(--pl);color:var(--p)}nav a.cur{color:var(--p);background:var(--pl)}
-.ncta{background:var(--p)!important;color:#fff!important;font-weight:700!important}.ncta:hover{background:var(--pd)!important}
-.hbg{display:none;background:none;border:none;cursor:pointer;color:var(--t2);font-size:22px}
-.phero{background:var(--bg2);border-bottom:1px solid var(--bd);padding:32px 20px}
-.phero h1{font-size:clamp(1.4rem,4vw,2rem);font-weight:700;color:var(--t);margin-bottom:8px}
-.phero p{color:var(--t3);font-size:.95rem;max-width:520px;font-weight:500}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
-section{padding:56px 0}.alt{background:var(--bg2)}
-.stag{display:inline-block;background:var(--pl);border:1px solid rgba(13,148,136,.2);border-radius:999px;padding:5px 14px;font-size:12px;font-weight:600;color:var(--p);margin-bottom:14px}
-.stit{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;color:var(--t);margin-bottom:10px;letter-spacing:-.3px;line-height:1.2}
-.sdesc{color:var(--t3);max-width:560px;line-height:1.8;font-size:.95rem;font-weight:500}
-.art-layout{display:grid;grid-template-columns:1fr 260px;gap:28px;max-width:1160px;margin:0 auto;padding:32px 20px 56px}
-.art-hero{background:var(--bg2);border-bottom:1px solid var(--bd);padding:32px 20px}
-.bc{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t4);margin-bottom:14px;flex-wrap:wrap;font-weight:500}
-.bc a{color:var(--t4);text-decoration:none}.bc a:hover{color:var(--p)}
-.art-cat{font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
-.art-title{font-size:clamp(1.4rem,4vw,1.9rem);font-weight:700;color:var(--t);line-height:1.25;margin-bottom:12px}
-.art-meta{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--t4);flex-wrap:wrap;font-weight:500}
-.art-body h2{font-size:.95rem;font-weight:700;color:var(--t);margin:22px 0 9px;padding-bottom:6px;border-bottom:2px solid var(--bd)}
-.art-body h3{font-size:.88rem;font-weight:700;color:var(--p);margin:16px 0 6px}
-.art-body p{color:var(--t2);margin-bottom:12px;font-size:14px;line-height:1.9;font-weight:400}
-.art-body ul,.art-body ol{padding-left:20px;margin-bottom:12px;color:var(--t2);font-size:14px;line-height:1.9;font-weight:400}
-.art-body strong{color:var(--t);font-weight:700}
-.art-body table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;border:1px solid var(--bd);border-radius:var(--rad);overflow:hidden}
-.art-body th{background:var(--pl);color:var(--pd);padding:9px 13px;text-align:left;font-size:11px;font-weight:700;border-bottom:2px solid rgba(13,148,136,.2)}
-.art-body td{padding:8px 13px;border-bottom:1px solid var(--bd);color:var(--t2);font-weight:400}
-.callout{border-left:3px solid var(--p);background:var(--pl);padding:13px 16px;margin:14px 0;font-size:14px;color:var(--t2);line-height:1.8;font-weight:400;border-radius:0 var(--rads) var(--rads) 0}
-.callout-danger{border-left:3px solid var(--danger);background:var(--dangerl);padding:13px 16px;margin:14px 0;font-size:14px;color:var(--t2);line-height:1.8;font-weight:400;border-radius:0 var(--rads) var(--rads) 0}
-.related-box{background:var(--bg2);border:1px solid var(--bd);border-left:3px solid var(--p);padding:13px 16px;margin:18px 0;border-radius:0 var(--rads) var(--rads) 0}
-.related-box p{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--p);margin-bottom:8px}
-.related-box ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px}
-.related-box li a{font-size:13px;color:var(--t3);font-weight:500}.related-box li a:hover{color:var(--p)}
-.discl{background:var(--bg2);border:1px solid var(--bd);padding:10px 13px;margin-top:20px;font-size:12px;color:var(--t4);line-height:1.6;font-weight:400;border-radius:var(--rads)}
-.tag-pill{background:var(--pl);border:1px solid rgba(13,148,136,.2);color:var(--p);padding:3px 9px;border-radius:999px;font-size:11px;display:inline-block;margin:2px;font-weight:600}
-.nav-btns{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
-.nav-btn{flex:1;min-width:0;padding:9px 12px;border:1px solid var(--bd);border-radius:var(--rad);text-decoration:none;color:var(--t4);font-size:12px;transition:all .15s;text-align:center;display:block;background:var(--card);font-weight:500}
-.nav-btn:hover{border-color:var(--p);color:var(--p)}
-.sc{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);padding:14px;margin-bottom:10px;box-shadow:var(--sh)}
-.sc h4{font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px}
-.sc a{display:block;font-size:13px;color:var(--t3);padding:6px 0;border-bottom:1px solid var(--bd);text-decoration:none;font-weight:500;transition:color .15s}
-.sc a:last-child{border:none}.sc a:hover{color:var(--p)}
-.tool-link{display:block;background:var(--p);color:#fff!important;text-align:center;padding:9px;border-radius:var(--rad);font-size:13px;font-weight:700;text-decoration:none!important;margin-top:9px}
-.bcard{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);overflow:hidden;transition:all .2s;text-decoration:none;display:block;color:inherit;box-shadow:var(--sh)}
-.bcard:hover{border-color:var(--p);transform:translateY(-2px);box-shadow:var(--shp)}
-.bimg{height:86px;display:flex;align-items:center;justify-content:center;font-size:28px;background:var(--bg2);border-bottom:1px solid var(--bd)}
-.bbody{padding:14px}.bcat{font-size:10px;font-weight:700;color:var(--p);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
-.bcard h3{font-size:.84rem;font-weight:600;color:var(--t);margin-bottom:5px;line-height:1.4}
-.bcard p{font-size:12px;color:var(--t3);line-height:1.65;margin-bottom:8px;font-weight:400}
-.bm{font-size:11px;color:var(--t4);display:flex;justify-content:space-between;font-weight:500}.rm{color:var(--p);font-weight:600}
-footer{background:var(--t);color:#f1f5f9;padding:40px 0 20px}
-.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;max-width:1160px;margin:0 auto 26px;padding:0 20px}
-.fbrand p{color:#94a3b8;font-size:12px;margin-top:8px;line-height:1.7}
-.fcc h4{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:#94a3b8;margin-bottom:9px}
-.fcc ul{list-style:none}.fcc li{margin-bottom:6px}.fcc a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:400}.fcc a:hover{color:#e2e8f0}
-.fbot{border-top:1px solid #1e293b;padding:14px 20px 0;max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
-.fbot p,.fbot a{font-size:11px;color:#64748b;text-decoration:none}.fbot a:hover{color:#94a3b8}
-@media(max-width:900px){.art-layout{grid-template-columns:1fr}}
-@media(max-width:768px){nav{display:none;position:absolute;top:62px;left:0;right:0;background:var(--card);padding:12px;flex-direction:column;border-bottom:1px solid var(--bd);box-shadow:0 4px 16px rgba(15,23,42,.08)}nav.op{display:flex}.hbg{display:block}.fg{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.fg{grid-template-columns:1fr}}
-</style>
-</head><body>
-<div id="ck"><div class="cki"><p>Essential cookies only — <a href="/cookie-policy.html">Cookie Policy</a>.</p><div class="ckb"><button class="ckdc" onclick="ckC('decline')">Decline</button><button class="ckac" onclick="ckC('accept')">Accept</button></div></div></div><header><div class="hi">
-  <a href="/" class="logo"><span class="logo-ico">🛡️</span><div class="logo-txt"><strong>Trusty Password</strong><small>Anti-Phishing · Credential Guard</small></div></a>
-  <nav id="mn">
-    <a href="/">Generator</a>
-    <a href="/blog.html" class="cur">Guides</a>
-    <a href="/about.html">About</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/#tool" class="ncta">Guard My Credentials →</a>
-  </nav>
-  <button class="hbg" aria-label="Menu">☰</button>
-</div></header>
-<div class="art-hero">
-  <div style="max-width:1160px;margin:0 auto;padding:0 20px">
-    <nav class="bc"><a href="/">Home</a><span>/</span><a href="/blog.html">Guides</a><span>/</span><span style="color:var(--t4)">Practical Security</span></nav>
-    <div class="art-cat">Practical Security</div>
-    <h1 class="art-title">How to Inspect a URL Before Entering Your Password</h1>
-    <div class="art-meta"><span>📅 21 Apr 2026</span><span>·</span><span>⏱ 7 min</span><span>·</span><span>✍ Sophie Laurent</span></div>
-  </div>
-</div>
-<div class="art-layout">
-  <article class="art-body">
-    <p>The URL address bar is your primary defence against fake login pages. Visual design, logos, and page content can all be copied exactly — the domain cannot be faked in the address bar of a correctly updated browser. Mastering URL inspection takes five minutes to learn and prevents the majority of phishing credential captures.</p>
-<div class="related-box"><p>Related Guides</p><ul>
-<li><a href="/blog/fake-login-page-detection.html">Full guide to detecting fake login pages</a></li>
-<li><a href="/blog/how-to-spot-phishing-emails.html">Spotting the phishing email that led you here</a></li>
-<li><a href="/">Generate a unique password for each account — the complement to URL vigilance</a></li>
-</ul></div>
-<h2>Understanding URL Structure</h2>
-<p>A URL has several components. Understanding each is essential for correct interpretation:</p>
-<pre>https://mail.accounts.google.com/signin/v2?hl=en
-  ↑       ↑    ↑        ↑         ↑       ↑
-scheme  sub  sub    root domain   path   query
-
-Protocol: https://
-Subdomain(s): mail.accounts.
-Root domain: google.com   ← THIS IS WHAT MATTERS
-Path: /signin/v2
-Query: ?hl=en</pre>
-<p>The root domain is the only part that is fixed and verified by the certificate. Everything before it (subdomains) and after it (path, query) can be set to anything by the site operator — including an attacker.</p>
-<h2>The Two Most Common URL Deception Techniques</h2>
-<h3>1. Subdomain impersonation</h3>
-<pre>https://google.com.accounts.secure-login.net/signin</pre>
-<p>Reading left to right, "google.com" appears early — it looks legitimate. But the root domain is "secure-login.net". Everything before "secure-login.net" is just a subdomain. The operator of "secure-login.net" controls this server entirely.</p>
-<h3>2. Path impersonation</h3>
-<pre>https://phishing-site.com/google.com/accounts/login</pre>
-<p>"google.com" appears after the first slash — it is part of the path, which the attacker controls completely. The root domain is "phishing-site.com".</p>
-<h2>The 10-Second URL Check</h2>
-<ol>
-  <li>Click the address bar to see the full URL</li>
-  <li>Find the first single <code>/</code> after <code>https://</code></li>
-  <li>Read the text immediately before that <code>/</code> — that is the full domain</li>
-  <li>Find the top-level domain (.com, .co.uk, .org) in that domain string</li>
-  <li>The segment immediately before the TLD is the root domain — verify it matches exactly</li>
-</ol>
-<div class="callout"><strong>Bookmark the login page:</strong> The safest way to reach any login page is from a bookmark you created yourself by navigating to the site directly. A bookmarked URL cannot be tampered with — it will always take you to the exact domain you visited when you created it.</div>
-    <div style="margin-top:16px"><span class="tag-pill">URL inspection</span> <span class="tag-pill">phishing detection</span> <span class="tag-pill">domain verification</span> <span class="tag-pill">browser security</span> <span class="tag-pill">HTTPS</span></div>
-    <div class="discl">For informational purposes only. Phishing threats evolve constantly — always consult current NCSC, CISA, and your organisation's security team guidance for your specific environment.</div>
-    <div class="nav-btns"><a href="/blog/phishing-resistant-mfa.html" class="nav-btn">← Which MFA Methods Actually Resist Phishing?</a><a href="/blog/credential-stuffing-vs-phishing.html" class="nav-btn">Credential Stuffing vs Phishing: Understand Both →</a></div>
-  </article>
-  <aside>
-    <div class="sc" style="border-top:2px solid var(--p)">
-      <h4>🛡️ Credential Guard</h4>
-      <p style="font-size:13px;color:var(--t3);line-height:1.6;margin-bottom:5px;font-weight:400">Generate unique phishing-resistant passwords with the 5-step Am I Safe? checklist.</p>
-      <a href="/" class="tool-link">Open Credential Guard →</a>
-    </div>
-    <div class="sc"><h4>More Guides</h4><a href="/blog/how-to-spot-phishing-emails.html">How to Spot a Phishing Email Before You Click</a>
-<a href="/blog/fake-login-page-detection.html">How to Detect a Fake Login Page</a>
-<a href="/blog/phishing-resistant-mfa.html">Which MFA Methods Actually Resist Phishing?</a>
-<a href="/blog/credential-stuffing-vs-phishing.html">Credential Stuffing vs Phishing: Understand Both Threat</a>
-<a href="/blog/phishing-attack-response.html">What to Do Immediately After a Phishing Attack</a></div>
-  </aside>
-</div>
-<footer><div class="fg">
-  <div class="fbrand"><a href="/" style="text-decoration:none;display:flex;align-items:center;gap:8px"><span style="font-size:20px">🛡️</span><span style="font-size:15px;font-weight:700;color:#f1f5f9">Trusty Password</span></a>
-  <p>Strong passwords and phishing-awareness guidance to protect your credentials from the most common online attacks.</p></div>
-  <div class="fcc"><h4>Tool</h4><ul><li><a href="/">Credential Guard</a></li><li><a href="/#faq">FAQ</a></li></ul></div>
-  <div class="fcc"><h4>Guides</h4><ul><li><a href="/blog.html">All Guides</a></li><li><a href="/about.html">About</a></li><li><a href="/contact.html">Contact</a></li></ul></div>
-  <div class="fcc"><h4>Legal</h4><ul><li><a href="/privacy-policy.html">Privacy</a></li><li><a href="/cookie-policy.html">Cookies</a></li><li><a href="/terms.html">Terms</a></li><li><a href="/affiliate-disclosure.html">Affiliates</a></li></ul></div>
-</div><div class="fbot">
-  <p>© 2026 trustypassword.com · Kokal Operations Ltd, United Kingdom</p>
-  <p><a href="/privacy-policy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
-</div></footer><script>
-(function(){if(!localStorage.getItem('trd-ck'))document.getElementById('ck').style.display='block';})();
-function ckC(v){localStorage.setItem('trd-ck',v);document.getElementById('ck').style.display='none';}
-document.querySelector('.hbg').addEventListener('click',function(){document.getElementById('mn').classList.toggle('op');});
 </script>
-</body></html>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--p:#0d9488;--pl:#0f766e;--a:#14b8a6;--al:#5eead4;--t:#1a202c;--t2:#4a5568;--t3:#718096;--s1:#F0FDFA;--s2:#CCFBF1;--w:#fff;--b:#dc2626;--g:#16a34a}
+body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--w);color:var(--t);line-height:1.7}
+nav{background:var(--p);padding:12px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+nav .logo{color:#fff;font-weight:800;font-size:20px;text-decoration:none}
+nav a{color:rgba(255,255,255,0.8);font-size:14px;text-decoration:none;margin-left:18px;transition:.2s}
+nav a:hover,nav a.cur{color:#fff}
+.post-container{max-width:800px;margin:0 auto;padding:36px 22px 60px}
+.tag{display:inline-block;background:var(--p);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
+.breadcrumb{margin-bottom:18px;font-size:13px;color:var(--t3)}
+.breadcrumb a{color:var(--a);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+h1{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:800;color:var(--t);line-height:1.3;max-width:700px;margin:0 auto 8px;text-align:center}
+.meta{font-size:13px;color:var(--t3);text-align:center;margin-bottom:28px}
+.callout{background:#FFFBEB;border-left:4px solid var(--b);padding:16px 20px;margin:24px 0;border-radius:4px;font-size:15px}
+h2{font-size:clamp(1.2rem,2.5vw,1.5rem);font-weight:800;color:var(--t);margin:40px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--s2)}
+h3{font-size:clamp(1.05rem,2vw,1.2rem);font-weight:700;color:var(--t);margin:28px 0 10px}
+p,li{font-size:16px;line-height:1.8;color:var(--t2);margin:0 0 16px}
+li{margin-bottom:6px}
+ul,ol{padding-left:24px;margin:0 0 20px}
+a{color:var(--a);text-decoration:none}
+a:hover{text-decoration:underline}
+code{background:var(--s1);padding:2px 6px;border-radius:3px;font-size:14px;border:1px solid var(--s2)}
+.bcta{display:inline-block;background:linear-gradient(135deg,var(--p),var(--pl));color:#fff;padding:14px 32px;border-radius:8px;font-size:16px;font-weight:700;text-decoration:none;margin:32px 0 0;transition:.2s}
+.bcta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(13,148,136,0.3);text-decoration:none}
+footer{background:var(--p);color:rgba(255,255,255,0.7);padding:32px 22px;text-align:center;font-size:13px;line-height:1.8;margin-top:48px}
+footer a{color:rgba(255,255,255,0.8);text-decoration:none;margin:0 6px}
+footer a:hover{color:#fff;text-decoration:underline}
+footer .flink{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.rpost{background:var(--s1);padding:16px;border-radius:8px;border:1px solid var(--s2);transition:.2s}
+.rpost:hover{border-color:var(--a);box-shadow:0 2px 8px rgba(13,148,136,0.15)}
+.rtag{display:inline-block;background:var(--a);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:3px;text-transform:uppercase}
+@media(max-width:600px){.post-container{padding:24px 16px 40px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">&#x1f6e1;&#xfe0f; TrustyPass</a>
+  <div>
+    <a href="/">Guard</a>
+<a href="/blog.html" class="cur">Blog</a>
+<a href="/about.html">About</a>
+<a href="/contact.html">Contact</a>
+  </div>
+</nav>
+
+<main>
+  <div class="post-container">
+    <div class="breadcrumb">
+      <a href="/">Home</a> &#8250; <a href="/blog.html">Blog</a> &#8250;
+      <span>How to Inspect a URL Before Entering Your Password</span>
+    </div>
+
+    <div style="text-align:center;margin-bottom:28px">
+      <div class="tag" style="margin-bottom:8px">Practical Security</div>
+      <h1>🔗 How to Inspect a URL Before Entering Your Password</h1>
+      <div class="meta">By <strong>Sophie Laurent, Cybersecurity Awareness Trainer</strong>, Trusty Password &middot; 21 Apr 2026 &middot; 3 min read &middot; 0 words</div>
+    </div>
+
+
+
+
+
+    <div style="text-align:center">
+      <a href="/" class="bcta">Generate a Free Strong Password &#8594;</a>
+    </div>
+
+<div class="related" style="margin-top:48px;padding-top:32px;border-top:1px solid var(--s2)"><h3 style="font-size:20px;margin-bottom:16px">Related Articles</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px"><div class="rpost"><div class="rtag">Phishing Awareness</div><h4 style="margin:4px 0"><a href="/blog/how-to-spot-phishing-emails.html">📧 How to Spot a Phishing Email Before You Click</a></h4><p style="font-size:13px;color:var(--t3);margin:4px 0 0">7 May 2026</p></div>
+<div class="rpost"><div class="rtag">Phishing Awareness</div><h4 style="margin:4px 0"><a href="/blog/fake-login-page-detection.html">🔍 How to Detect a Fake Login Page</a></h4><p style="font-size:13px;color:var(--t3);margin:4px 0 0">2 May 2026</p></div>
+<div class="rpost"><div class="rtag">Authentication</div><h4 style="margin:4px 0"><a href="/blog/phishing-resistant-mfa.html">🔐 Which MFA Methods Actually Resist Phishing?</a></h4><p style="font-size:13px;color:var(--t3);margin:4px 0 0">27 Apr 2026</p></div>
+</div>
+</div>
+  </div>
+</main>
+
+<section style="background:#F0FDFA;padding:32px 22px;text-align:center;margin-top:0"><div style="max-width:800px;margin:0 auto"><h3 style="margin:0 0 14px;font-size:15px;color:#0d9488;font-weight:700">More Password Security Tools</h3><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:8px"><a href="https://securekeygenerator.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen</a><a href="https://titanpasswords.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2694;&#xfe0f; TitanPasswords</a><a href="https://bestpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f6e1;&#xfe0f; Best Password Generator</a><a href="https://freestrongpassword.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f510; Free Strong Password</a><a href="https://instantpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x26a1; Instant Password</a><a href="https://ironvaultkeys.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f5dd;&#xfe0f; Iron Vault Keys</a><a href="https://randompasswordtool.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; Random Pwd Tool</a><a href="https://safepassbuilder.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f468;&#x200d;&#x1f469;&#x200d;&#x1f467;&#x200d;&#x1f466; Safe Pass Builder</a><a href="https://strongpassfactory.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2699;&#xfe0f; StrongPassFactory</a><a href="https://securekeygenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen.org</a><a href="https://trustypassword.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f4da; TrustyPassword.org</a></div></div></section>
+<footer>
+  <div class="flink">
+    <a href="/">Credential Guard</a>
+    <a href="/blog.html">Blog</a>
+    <a href="/about.html">About</a>
+    <a href="/privacy-policy.html">Privacy</a>
+    <a href="/affiliate-disclosure.html">Disclosure</a>
+    <a href="/contact.html">Contact</a>
+  </div>
+  <p>&copy; 2026 TrustyPassword.com &mdash; Anti-phishing credential guard and security guides</p>
+</footer>
+
+<div id="cc" style="position:fixed;bottom:0;left:0;right:0;background:var(--p);color:#fff;padding:12px 22px;display:flex;justify-content:space-between;align-items:center;font-size:13px;z-index:1000">
+  <span>We use cookies to improve your experience. <a href="/cookie-policy.html" style="color:var(--al);text-decoration:underline">Learn more</a></span>
+  <button onclick="this.parentElement.style.display='none'" style="background:var(--a);color:#fff;border:none;padding:6px 16px;border-radius:4px;cursor:pointer;font-size:13px">Accept</button>
+</div>
+
+</body>
+</html>
