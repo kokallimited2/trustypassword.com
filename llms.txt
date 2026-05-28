@@ -28,6 +28,16 @@ Sophie Laurent, Cybersecurity Awareness Trainer
 FTSE 250, NHS trusts, public sector. Phishing simulation, FIDO2 advocacy.
 Aligned with NCSC, CISA, NIST SP 800-63B 2025.
 
+## Blog — Individual Post URLs (each Google-indexable)
+
+- https://trustypassword.com/blog/how-to-spot-phishing-emails.html
+- https://trustypassword.com/blog/fake-login-page-detection.html
+- https://trustypassword.com/blog/phishing-resistant-mfa.html
+- https://trustypassword.com/blog/url-inspection-before-login.html
+- https://trustypassword.com/blog/credential-stuffing-vs-phishing.html
+- https://trustypassword.com/blog/phishing-attack-response.html
+- https://trustypassword.com/blog/kali365-phaas-device-code-phishing.html
+
 ## NCSC Phishing Report
 
 report@phishing.gov.uk (UK Suspicious Email Reporting Service)

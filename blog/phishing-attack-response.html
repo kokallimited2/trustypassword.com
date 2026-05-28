@@ -120,7 +120,7 @@
         "@type": "WebPage",
         "@id": "https://trustypassword.com/blog/phishing-attack-response.html"
       },
-      "wordCount": "0",
+      "wordCount": "670",
       "inLanguage": "en-US",
       "speakable": {
         "@type": "SpeakableSpecification",
@@ -215,12 +215,80 @@ footer .flink{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-
     <div style="text-align:center;margin-bottom:28px">
       <div class="tag" style="margin-bottom:8px">Incident Response</div>
       <h1>🚨 What to Do Immediately After a Phishing Attack</h1>
-      <div class="meta">By <strong>Sophie Laurent, Cybersecurity Awareness Trainer</strong>, Trusty Password &middot; 7 Apr 2026 &middot; 3 min read &middot; 0 words</div>
+      <div class="meta">By <strong>Sophie Laurent, Cybersecurity Awareness Trainer</strong>, Trusty Password &middot; 7 Apr 2026 &middot; 3 min read &middot; 670 words</div>
     </div>
 
+<div class="toc" style="background:var(--s1);border-radius:12px;padding:20px 24px;margin-bottom:32px;border:1px solid var(--s2)"><h3 style="margin:0 0 8px;font-size:14px;color:var(--t2)">On this page</h3><ul style="margin:0;padding-left:18px;font-size:14px;line-height:2"><li><a href="#step-1-change-the-password-immediately">Step 1: Change the Password Immediately</a></li>
+<li><a href="#step-2-revoke-all-active-sessions">Step 2: Revoke All Active Sessions</a></li>
+<li><a href="#step-3-check-and-restore-account-recovery-details">Step 3: Check and Restore Account Recovery Details</a></li>
+<li><a href="#step-4-enable-or-verify-multi-factor-authentication">Step 4: Enable or Verify Multi-Factor Authentication</a></li>
+<li><a href="#step-5-check-for-unauthorised-actions">Step 5: Check for Unauthorised Actions</a></li>
+<li><a href="#step-6-report-the-phishing-attack">Step 6: Report the Phishing Attack</a></li>
+<li><a href="#step-7-scan-your-computer-for-malware">Step 7: Scan Your Computer for Malware</a></li>
+<li><a href="#preventing-future-phishing-attacks">Preventing Future Phishing Attacks</a></li>
+</ul></div>
 
+<p>If you think you have entered your credentials on a phishing site, act immediately. Speed matters — attackers often automate credential validation within seconds of capture. Follow these steps in order to minimise damage.</p>
 
+<h2 id="step-1-change-the-password-immediately">Step 1: Change the Password Immediately</h2>
 
+<p>Navigate directly to the real website by typing the address into your browser — do not use any link from the suspicious email or page. Log in and change your password to a new, unique, randomly generated password. If you use a password manager, generate a new password through the manager and save it immediately.</p>
+
+<p><strong>Critical:</strong> Change the password <em>before</em> doing anything else. Every minute counts. If the attacker has already used the captured credentials, changing the password locks them out.</p>
+
+<h2 id="step-2-revoke-all-active-sessions">Step 2: Revoke All Active Sessions</h2>
+
+<p>Most services allow you to see and revoke active login sessions from the security settings page. After changing your password, go to Security Settings and click <strong>"Sign out of all devices"</strong> or <strong>"Revoke all sessions."</strong> This forces any attacker who logged in before you changed the password to authenticate again — and they will not be able to because the password is now different.</p>
+
+<p>This step is often overlooked but is essential because attackers may have set up persistent sessions that survive a password change on some platforms.</p>
+
+<h2 id="step-3-check-and-restore-account-recovery-details">Step 3: Check and Restore Account Recovery Details</h2>
+
+<p>Attackers frequently change recovery email addresses, phone numbers, and security questions to lock you out of your own account. After changing the password:</p>
+<ol>
+<li>Go to Account Recovery or Security Settings.</li>
+<li>Verify that the recovery email address and phone number are yours.</li>
+<li>If they were changed, restore them to your details immediately.</li>
+<li>Check that no unrecognised MFA methods were added.</li>
+</ol>
+
+<h2 id="step-4-enable-or-verify-multi-factor-authentication">Step 4: Enable or Verify Multi-Factor Authentication</h2>
+
+<p>If MFA was not enabled before the phishing attack, enable it now. Use TOTP (an authenticator app) or, ideally, a passkey or hardware security key. If MFA was already enabled, verify that no unrecognised MFA methods were added by the attacker. Some phishing kits add an attacker-controlled MFA method during the attack, giving them persistent access even after the password changes.</p>
+
+<p>See our guide on <a href="/blog/phishing-resistant-mfa.html">which MFA methods actually resist phishing</a> for advice on choosing the right method.</p>
+
+<h2 id="step-5-check-for-unauthorised-actions">Step 5: Check for Unauthorised Actions</h2>
+
+<p>Review the account's recent activity log if available. Look for:</p>
+<ul>
+<li><strong>Messages sent</strong> from your email or social media accounts (attackers often use compromised accounts to send phishing messages to your contacts).</li>
+<li><strong>Purchases or transactions</strong> you did not make — especially on shopping, banking, or payment accounts.</li>
+<li><strong>API keys or app integrations</strong> that were added without your knowledge — revoke any you do not recognise.</li>
+<li><strong>Forwarding rules</strong> added to your email (attackers set up email forwarding to receive future password reset emails).</li>
+</ul>
+
+<h2 id="step-6-report-the-phishing-attack">Step 6: Report the Phishing Attack</h2>
+
+<p>Reporting helps protect others and may alert your organisation to a broader attack:</p>
+<ul>
+<li><strong>In the UK:</strong> Forward the phishing email to the NCSC Suspicious Email Reporting Service at <strong>report@phishing.gov.uk</strong></li>
+<li><strong>If financial loss occurred:</strong> Report to Action Fraud at actionfraud.police.uk or call 0300 123 2040</li>
+<li><strong>If financial credentials were involved:</strong> Call your bank immediately using the number on the back of your card — do not use any number from the phishing email</li>
+<li><strong>At work:</strong> Report to your IT security team immediately. Phishing attacks targeting employees can escalate to ransomware or data breaches</li>
+</ul>
+
+<h2 id="step-7-scan-your-computer-for-malware">Step 7: Scan Your Computer for Malware</h2>
+
+<p>If you visited a phishing site, the page may have delivered malware in addition to capturing your credentials. Run a full antivirus scan using Windows Defender, Malwarebytes, or another trusted security tool. If you clicked a link in a phishing email that downloaded a file, disconnect from the internet before scanning.</p>
+
+<h2 id="preventing-future-phishing-attacks">Preventing Future Phishing Attacks</h2>
+<ul>
+<li>Use a password manager to generate and store unique passwords — it also provides domain-bound autofill that detects fake login pages.</li>
+<li>Enable FIDO2/WebAuthn passkeys on accounts that support them — these cannot be phished.</li>
+<li>Never click links in emails — navigate directly to websites by typing the address.</li>
+<li>Learn to <a href="/blog/how-to-spot-phishing-emails.html">spot phishing emails before you click</a>.</li>
+</ul>
 
     <div style="text-align:center">
       <a href="/" class="bcta">Generate a Free Strong Password &#8594;</a>
@@ -234,6 +302,9 @@ footer .flink{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-
   </div>
 </main>
 
+<div style="max-width:800px;margin:24px auto;padding:16px 22px;background:#f0fdfa;border-radius:10px;border:1px solid #ccfbf1">
+<p style="margin:0;font-size:13px;color:#0f766e"><strong>🔒 Stay protected:</strong> Use <a href="https://www.kaspersky.com/?r=1&amp;icid=affiliate&amp;affid=1000001" target="_blank" rel="nofollow noopener">Kaspersky Premium</a> for antivirus protection and <a href="https://hidename.com/?ref=trusty" target="_blank" rel="nofollow noopener">Hide My Name VPN</a> for encrypted browsing.</p>
+</div>
 <section style="background:#F0FDFA;padding:32px 22px;text-align:center;margin-top:0"><div style="max-width:800px;margin:0 auto"><h3 style="margin:0 0 14px;font-size:15px;color:#0d9488;font-weight:700">More Password Security Tools</h3><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:8px"><a href="https://securekeygenerator.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen</a><a href="https://titanpasswords.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2694;&#xfe0f; TitanPasswords</a><a href="https://bestpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f6e1;&#xfe0f; Best Password Generator</a><a href="https://freestrongpassword.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f510; Free Strong Password</a><a href="https://instantpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x26a1; Instant Password</a><a href="https://ironvaultkeys.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f5dd;&#xfe0f; Iron Vault Keys</a><a href="https://randompasswordtool.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; Random Pwd Tool</a><a href="https://safepassbuilder.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f468;&#x200d;&#x1f469;&#x200d;&#x1f467;&#x200d;&#x1f466; Safe Pass Builder</a><a href="https://strongpassfactory.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2699;&#xfe0f; StrongPassFactory</a><a href="https://securekeygenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen.org</a><a href="https://trustypassword.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f4da; TrustyPassword.org</a></div></div></section>
 <footer>
   <div class="flink">

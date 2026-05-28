@@ -120,7 +120,7 @@
         "@type": "WebPage",
         "@id": "https://trustypassword.com/blog/url-inspection-before-login.html"
       },
-      "wordCount": "0",
+      "wordCount": "519",
       "inLanguage": "en-US",
       "speakable": {
         "@type": "SpeakableSpecification",
@@ -215,12 +215,78 @@ footer .flink{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-
     <div style="text-align:center;margin-bottom:28px">
       <div class="tag" style="margin-bottom:8px">Practical Security</div>
       <h1>🔗 How to Inspect a URL Before Entering Your Password</h1>
-      <div class="meta">By <strong>Sophie Laurent, Cybersecurity Awareness Trainer</strong>, Trusty Password &middot; 21 Apr 2026 &middot; 3 min read &middot; 0 words</div>
+      <div class="meta">By <strong>Sophie Laurent, Cybersecurity Awareness Trainer</strong>, Trusty Password &middot; 21 Apr 2026 &middot; 3 min read &middot; 519 words</div>
     </div>
 
+<div class="toc" style="background:var(--s1);border-radius:12px;padding:20px 24px;margin-bottom:32px;border:1px solid var(--s2)"><h3 style="margin:0 0 8px;font-size:14px;color:var(--t2)">On this page</h3><ul style="margin:0;padding-left:18px;font-size:14px;line-height:2"><li><a href="#understand-the-structure-of-a-url">Understand the Structure of a URL</a></li>
+<li><a href="#find-the-root-domain">Find the Root Domain</a></li>
+<li><a href="#common-url-deception-techniques">Common URL Deception Techniques</a></li>
+<li><a href="#how-to-verify-a-url-on-any-device">How to Verify a URL on Any Device</a></li>
+<li><a href="#using-password-manager-autofill-as-a-url-check">Using Password Manager Autofill as a URL Check</a></li>
+</ul></div>
 
+<p>Inspecting a URL before entering your password is the most important technical skill for avoiding phishing. A fake login page can look identical to the real one, but the URL in the address bar always tells the truth. Here is how to read a URL like a security professional.</p>
 
+<h2 id="understand-the-structure-of-a-url">Understand the Structure of a URL</h2>
 
+<p>Every URL has the same structure. Learn to identify each part:</p>
+
+<p><strong>https://www.example.com/login?return=home</strong></p>
+<ul>
+<li><strong>https://</strong> — The protocol (HTTP vs HTTPS). HTTPS is expected; HTTP on a login page is an immediate red flag.</li>
+<li><strong>www.example.com</strong> — The full domain name. This is what you must verify.</li>
+<li><strong>/login</strong> — The path. This matters less than the domain — attackers can put any path on any domain.</li>
+<li><strong>?return=home</strong> — Query parameters. These should not be used to judge legitimacy.</li>
+</ul>
+
+<p><strong>The domain is the only part that identifies the website owner.</strong> Everything after the first forward slash belongs to that domain. An attacker cannot put "paypal.com" in the domain of a page they do not own.</p>
+
+<h2 id="find-the-root-domain">Find the Root Domain</h2>
+
+<p>To find the root domain, read the domain from right to left. The top-level domain (TLD) is the last part (.com, .org, .co.uk). One step left is the root domain. Anything to the left of that is a subdomain — and can be anything.</p>
+
+<p><strong>Example:</strong> In <em>login.paypal.com.security-alerts.xyz</em>:</p>
+<ul>
+<li>TLD: .xyz</li>
+<li>Root domain: security-alerts.xyz</li>
+<li>Subdomain: login.paypal.com (the attacker owns security-alerts.xyz and added login.paypal.com as a subdomain)</li>
+</ul>
+
+<p>The real PayPal domain is <strong>paypal.com</strong>. Seeing "paypal" anywhere in a URL that does not end with paypal.com means you are on a different website.</p>
+
+<h2 id="common-url-deception-techniques">Common URL Deception Techniques</h2>
+
+<h3>Subdomain Spoofing</h3>
+<p>Attackers create subdomains that look like legitimate domains: <em>amazon.com.au.redirect-verify.tk</em>. The real domain is redirect-verify.tk, not amazon.com.au.</p>
+
+<h3>Typosquatting</h3>
+<p>Domains that differ by one character: amaz0n.com (digit zero instead of letter o), go0gle.com, micr0soft.com. Always verify exact spelling.</p>
+
+<h3>Trustworthy Path, Suspicious Domain</h3>
+<p>A phishing page might have <em>/paypal/login/</em> in the URL path, but if the domain before it is wrong, the path is irrelevant. The path is just a folder on the attacker's server.</p>
+
+<h2 id="how-to-verify-a-url-on-any-device">How to Verify a URL on Any Device</h2>
+
+<h3>On Desktop</h3>
+<ol>
+<li>Click the address bar to see the full URL (not truncated).</li>
+<li>Read the domain from right to left to find the root domain.</li>
+<li>Compare the root domain to the official domain of the organisation.</li>
+<li>If they do not match exactly, do not enter your password.</li>
+</ol>
+
+<h3>On Mobile</h3>
+<ol>
+<li>Tap the address bar to expand it.</li>
+<li>Read the full domain carefully — mobile browsers often truncate long domains.</li>
+<li>If the domain looks suspicious, navigate directly by typing the known address into a new tab.</li>
+</ol>
+
+<h2 id="using-password-manager-autofill-as-a-url-check">Using Password Manager Autofill as a URL Check</h2>
+
+<p>Password managers only autofill on the exact domain where credentials were saved. If you visit a page and your password manager does not offer to fill, the domain does not match — even if the page looks identical. This is the simplest and most reliable URL check available. If your password manager does not offer credentials, the URL is wrong.</p>
+
+<p>Learn more about <a href="/blog/how-to-spot-phishing-emails.html">how to spot phishing emails</a> — the first step in the attack chain that leads to fake login pages.</p>
 
     <div style="text-align:center">
       <a href="/" class="bcta">Generate a Free Strong Password &#8594;</a>
@@ -234,6 +300,9 @@ footer .flink{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-
   </div>
 </main>
 
+<div style="max-width:800px;margin:24px auto;padding:16px 22px;background:#f0fdfa;border-radius:10px;border:1px solid #ccfbf1">
+<p style="margin:0;font-size:13px;color:#0f766e"><strong>🔒 Stay protected:</strong> Use <a href="https://www.kaspersky.com/?r=1&amp;icid=affiliate&amp;affid=1000001" target="_blank" rel="nofollow noopener">Kaspersky Premium</a> for antivirus protection and <a href="https://hidename.com/?ref=trusty" target="_blank" rel="nofollow noopener">Hide My Name VPN</a> for encrypted browsing.</p>
+</div>
 <section style="background:#F0FDFA;padding:32px 22px;text-align:center;margin-top:0"><div style="max-width:800px;margin:0 auto"><h3 style="margin:0 0 14px;font-size:15px;color:#0d9488;font-weight:700">More Password Security Tools</h3><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:8px"><a href="https://securekeygenerator.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen</a><a href="https://titanpasswords.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2694;&#xfe0f; TitanPasswords</a><a href="https://bestpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f6e1;&#xfe0f; Best Password Generator</a><a href="https://freestrongpassword.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f510; Free Strong Password</a><a href="https://instantpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x26a1; Instant Password</a><a href="https://ironvaultkeys.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f5dd;&#xfe0f; Iron Vault Keys</a><a href="https://randompasswordtool.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; Random Pwd Tool</a><a href="https://safepassbuilder.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f468;&#x200d;&#x1f469;&#x200d;&#x1f467;&#x200d;&#x1f466; Safe Pass Builder</a><a href="https://strongpassfactory.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2699;&#xfe0f; StrongPassFactory</a><a href="https://securekeygenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen.org</a><a href="https://trustypassword.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f4da; TrustyPassword.org</a></div></div></section>
 <footer>
   <div class="flink">

@@ -120,7 +120,7 @@
         "@type": "WebPage",
         "@id": "https://trustypassword.com/blog/fake-login-page-detection.html"
       },
-      "wordCount": "0",
+      "wordCount": "608",
       "inLanguage": "en-US",
       "speakable": {
         "@type": "SpeakableSpecification",
@@ -215,12 +215,60 @@ footer .flink{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-
     <div style="text-align:center;margin-bottom:28px">
       <div class="tag" style="margin-bottom:8px">Phishing Awareness</div>
       <h1>🔍 How to Detect a Fake Login Page</h1>
-      <div class="meta">By <strong>Sophie Laurent, Cybersecurity Awareness Trainer</strong>, Trusty Password &middot; 2 May 2026 &middot; 3 min read &middot; 0 words</div>
+      <div class="meta">By <strong>Sophie Laurent, Cybersecurity Awareness Trainer</strong>, Trusty Password &middot; 2 May 2026 &middot; 3 min read &middot; 608 words</div>
     </div>
 
+<div class="toc" style="background:var(--s1);border-radius:12px;padding:20px 24px;margin-bottom:32px;border:1px solid var(--s2)"><h3 style="margin:0 0 8px;font-size:14px;color:var(--t2)">On this page</h3><ul style="margin:0;padding-left:18px;font-size:14px;line-height:2"><li><a href="#the-domain-name-is-everything">The Domain Name Is Everything</a></li>
+<li><a href="#check-for-https--but-do-not-trust-the-padlock-alone">Check for HTTPS — But Do Not Trust the Padlock Alone</a></li>
+<li><a href="#password-manager-autofill-is-your-best-defence">Password Manager Autofill Is Your Best Defence</a></li>
+<li><a href="#look-for-visual-clues">Look for Visual Clues</a></li>
+<li><a href="#what-to-do-if-you-suspect-a-fake-login-page">What to Do If You Suspect a Fake Login Page</a></li>
+</ul></div>
 
+<p>Fake login pages are the most common tool used in credential theft. An attacker creates a convincing copy of a real login page — sometimes visually identical — and tricks you into entering your username and password. Detecting a fake login page requires technical verification, not visual inspection.</p>
 
+<h2 id="the-domain-name-is-everything">The Domain Name Is Everything</h2>
 
+<p>The single most reliable indicator of a fake login page is the domain name in your browser's address bar. Attackers use several tricks to make domains look legitimate:</p>
+<ul>
+<li><strong>Subdomain deception:</strong> login-paypal.com.security-alerts.xyz — the real domain is the last part before the TLD (.xyz). The word "paypal" is just a subdirectory of a completely different site.</li>
+<li><strong>Typosquatting:</strong> amaz0n.co.uk (using 0 instead of o), goggle.com, faceb00k.com — one character different from the real name.</li>
+<li><strong>Similar characters:</strong> Using Cyrillic letters that look identical to Latin characters (homograph attack). In the address bar, "арple.com" uses Cyrillic characters that render identically to "apple.com" but is a completely different domain.</li>
+</ul>
+
+<p><strong>The fix:</strong> Learn the root domain of every service you use. For PayPal, the root is paypal.com. For your bank, it is the domain you see when you type their address directly. If the domain in the address bar does not match what you expect, do not enter your credentials.</p>
+
+<h2 id="check-for-https--but-do-not-trust-the-padlock-alone">Check for HTTPS — But Do Not Trust the Padlock Alone</h2>
+
+<p>A padlock icon and HTTPS indicate that data between your browser and the server is encrypted. They do <strong>not</strong> indicate that the website is legitimate. Free TLS certificates from Let's Encrypt allow any attacker to display a padlock on a phishing site. The padlock tells you the connection is encrypted — it does not tell you who is on the other end.</p>
+
+<p><strong>What matters more:</strong> Click the padlock icon to view the certificate details. Check whether the certificate lists the organisation name and whether it matches the expected company. Extended Validation (EV) certificates show a green bar with the organisation's legal name — but even these are increasingly rare.</p>
+
+<h2 id="password-manager-autofill-is-your-best-defence">Password Manager Autofill Is Your Best Defence</h2>
+
+<p>Password managers and browser autofill are domain-bound. They only offer to fill credentials on the exact domain where the credentials were originally saved. If you visit a login page that looks identical to PayPal but your password manager does not offer to autofill, the domain is wrong — even if the page looks perfect.</p>
+
+<p><strong>This is the most reliable technical check available to non-experts.</strong> If you have saved a password for a service and your password manager does not offer it on a login page, do not type your password manually. Navigate directly to the real site by typing the address.</p>
+
+<h2 id="look-for-visual-clues">Look for Visual Clues</h2>
+
+<p>While visual inspection is not definitive, certain clues can reveal a fake page:</p>
+<ul>
+<li><strong>Missing or broken images:</strong> The company logo may not load, or images appear stretched and pixelated.</li>
+<li><strong>Inconsistent fonts:</strong> The page uses a different typeface from the real site.</li>
+<li><strong>No footer links:</strong> Legitimate sites include privacy policies, terms of service, and contact information in the footer. Fake pages often omit these.</li>
+<li><strong>Unusual form fields:</strong> The page asks for information that the real site does not (e.g., your mother's maiden name for a simple login).</li>
+</ul>
+
+<h2 id="what-to-do-if-you-suspect-a-fake-login-page">What to Do If You Suspect a Fake Login Page</h2>
+<ol>
+<li><strong>Do not enter any credentials</strong> — not even a test username.</li>
+<li><strong>Verify the domain</strong> using the steps above.</li>
+<li><strong>Navigate directly</strong> to the real site by typing the address into a new tab.</li>
+<li><strong>Report the phishing page</strong> to Google Safe Browsing (via the report phishing option in Chrome) or to the NCSC.</li>
+</ol>
+
+<p>If you want to understand the broader threat landscape, read about <a href="/blog/credential-stuffing-vs-phishing.html">the difference between credential stuffing and phishing</a> and why both matter.</p>
 
     <div style="text-align:center">
       <a href="/" class="bcta">Generate a Free Strong Password &#8594;</a>
@@ -234,6 +282,9 @@ footer .flink{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-
   </div>
 </main>
 
+<div style="max-width:800px;margin:24px auto;padding:16px 22px;background:#f0fdfa;border-radius:10px;border:1px solid #ccfbf1">
+<p style="margin:0;font-size:13px;color:#0f766e"><strong>🔒 Stay protected:</strong> Use <a href="https://www.kaspersky.com/?r=1&amp;icid=affiliate&amp;affid=1000001" target="_blank" rel="nofollow noopener">Kaspersky Premium</a> for antivirus protection and <a href="https://hidename.com/?ref=trusty" target="_blank" rel="nofollow noopener">Hide My Name VPN</a> for encrypted browsing.</p>
+</div>
 <section style="background:#F0FDFA;padding:32px 22px;text-align:center;margin-top:0"><div style="max-width:800px;margin:0 auto"><h3 style="margin:0 0 14px;font-size:15px;color:#0d9488;font-weight:700">More Password Security Tools</h3><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:8px"><a href="https://securekeygenerator.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen</a><a href="https://titanpasswords.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2694;&#xfe0f; TitanPasswords</a><a href="https://bestpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f6e1;&#xfe0f; Best Password Generator</a><a href="https://freestrongpassword.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f510; Free Strong Password</a><a href="https://instantpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x26a1; Instant Password</a><a href="https://ironvaultkeys.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f5dd;&#xfe0f; Iron Vault Keys</a><a href="https://randompasswordtool.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; Random Pwd Tool</a><a href="https://safepassbuilder.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f468;&#x200d;&#x1f469;&#x200d;&#x1f467;&#x200d;&#x1f466; Safe Pass Builder</a><a href="https://strongpassfactory.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2699;&#xfe0f; StrongPassFactory</a><a href="https://securekeygenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen.org</a><a href="https://trustypassword.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f4da; TrustyPassword.org</a></div></div></section>
 <footer>
   <div class="flink">

@@ -1,25 +1,20 @@
-# robots.txt — trustypassword.com
 User-agent: *
 Allow: /
-Disallow: /assets/drafts/
-Disallow: /admin/
 
-User-agent: Googlebot
-Allow: /
-
+# AI crawlers - explicitly allowed
 User-agent: GPTBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: PerplexityBot
 Allow: /
 
 User-agent: Google-Extended
 Allow: /
 
-User-agent: Bingbot
+User-agent: Claude-Web
 Allow: /
 
-Sitemap: https://trustypassword.com/sitemap.xml
+User-agent: CCBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://trustypassword.com/blog/sitemap.xml

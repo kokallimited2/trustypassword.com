@@ -120,7 +120,7 @@
         "@type": "WebPage",
         "@id": "https://trustypassword.com/blog/phishing-resistant-mfa.html"
       },
-      "wordCount": "0",
+      "wordCount": "580",
       "inLanguage": "en-US",
       "speakable": {
         "@type": "SpeakableSpecification",
@@ -215,12 +215,55 @@ footer .flink{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-
     <div style="text-align:center;margin-bottom:28px">
       <div class="tag" style="margin-bottom:8px">Authentication</div>
       <h1>🔐 Which MFA Methods Actually Resist Phishing?</h1>
-      <div class="meta">By <strong>Sophie Laurent, Cybersecurity Awareness Trainer</strong>, Trusty Password &middot; 27 Apr 2026 &middot; 3 min read &middot; 0 words</div>
+      <div class="meta">By <strong>Sophie Laurent, Cybersecurity Awareness Trainer</strong>, Trusty Password &middot; 27 Apr 2026 &middot; 3 min read &middot; 580 words</div>
     </div>
 
+<div class="toc" style="background:var(--s1);border-radius:12px;padding:20px 24px;margin-bottom:32px;border:1px solid var(--s2)"><h3 style="margin:0 0 8px;font-size:14px;color:var(--t2)">On this page</h3><ul style="margin:0;padding-left:18px;font-size:14px;line-height:2"><li><a href="#the-mfa-hierarchy-from-least-to-most-phishing-resistant">The MFA Hierarchy: From Least to Most Phishing-Resistant</a></li>
+<li><a href="#what-method-should-you-use">What Method Should You Use?</a></li>
+<li><a href="#understanding-aitm-phishing-toolkits">Understanding AiTM Phishing Toolkits</a></li>
+<li><a href="#how-to-enable-phishing-resistant-mfa">How to Enable Phishing-Resistant MFA</a></li>
+</ul></div>
 
+<p>Multi-factor authentication (MFA) significantly improves account security, but not all MFA methods protect against phishing. Some MFA methods can be bypassed in real time by attackers. Choosing the right MFA method determines whether your second factor actually stops a phishing attack or simply provides a false sense of security.</p>
 
+<h2 id="the-mfa-hierarchy-from-least-to-most-phishing-resistant">The MFA Hierarchy: From Least to Most Phishing-Resistant</h2>
 
+<h3>Level 1: SMS and Voice OTP (Least Secure)</h3>
+<p>SMS-based one-time passcodes are the most common MFA method and the easiest to intercept. Attackers use SIM-swapping — convincing a mobile carrier to transfer your phone number to their SIM card — to receive your SMS codes. Additionally, real-time adversary-in-the-middle (AiTM) phishing toolkits can intercept SMS codes within their validity window. The NCSC advises against SMS as a primary MFA method wherever possible.</p>
+
+<h3>Level 2: TOTP Authenticator Apps (Moderate)</h3>
+<p>Time-based one-time passwords from apps like Google Authenticator, Microsoft Authenticator, and Authy are more secure than SMS because codes are generated locally on your device. However, TOTP codes can still be intercepted by AiTM phishing attacks in real time. An attacker sets up a fake login page that forwards your credentials and TOTP code to the real site simultaneously — the session cookie is then handed back to you while the attacker retains an independent session.</p>
+
+<h3>Level 3: Push Notifications (Vulnerable to MFA Fatigue)</h3>
+<p>Push-based MFA (Microsoft Authenticator push, Duo push) sends a notification to your phone asking you to approve or deny a login attempt. Attackers exploit MFA fatigue — sending repeated push notifications until the user, frustrated or confused, finally approves one. In the 2022 Uber breach and multiple 2024 ransomware incidents, MFA fatigue was the primary attack vector.</p>
+
+<h3>Level 4: FIDO2/WebAuthn (Phishing-Resistant)</h3>
+<p>FIDO2/WebAuthn — implemented as hardware security keys (YubiKey, Google Titan Key) or platform passkeys (Apple iCloud Keychain, Google Password Manager) — is the only MFA method designed to resist phishing. The cryptographic challenge is bound to the origin domain. Even if a user is tricked into visiting a phishing site, the passkey will not authenticate because the domain does not match. This is phishing resistance by design.</p>
+
+<p>Google reported that after enabling FIDO2 for all employees, account takeovers from phishing fell to zero.</p>
+
+<h2 id="what-method-should-you-use">What Method Should You Use?</h2>
+
+<table>
+<tr><th>Risk Level</th><th>Recommended MFA</th><th>When to Use</th></tr>
+<tr><td><strong>High-value accounts</strong> (email, banking, admin portals)</td><td>FIDO2/WebAuthn passkey or hardware security key</td><td>Always — this is the gold standard</td></tr>
+<tr><td><strong>Medium-value accounts</strong> (social media, shopping)</td><td>TOTP authenticator app</td><td>When passkeys are not supported</td></tr>
+<tr><td><strong>Low-value accounts</strong></td><td>Any MFA is better than none</td><td>Enable whatever is available</td></tr>
+</table>
+
+<h2 id="understanding-aitm-phishing-toolkits">Understanding AiTM Phishing Toolkits</h2>
+
+<p>Adversary-in-the-middle phishing attacks use tools like EvilGrad, Modlishka, and Muraena to set up a reverse proxy between the user and the real site. The attacker's proxy captures credentials and session cookies in real time. AiTM toolkits bypass MFA because the user enters both password and MFA code on a page that looks identical to the real login page. Only FIDO2/WebAuthn resists AiTM attacks because the challenge-response is domain-bound.</p>
+
+<h2 id="how-to-enable-phishing-resistant-mfa">How to Enable Phishing-Resistant MFA</h2>
+<ol>
+<li><strong>Check if your accounts support passkeys.</strong> Google, Apple, Microsoft, GitHub, and PayPal all support passkey login. Go to Security Settings and look for "Passkey" or "Security Key."</li>
+<li><strong>Buy a hardware security key</strong> (YubiKey 5 Series or Google Titan Key) for your most important accounts.</li>
+<li><strong>Register two keys</strong> — one primary and one backup stored in a safe place.</li>
+<li><strong>Keep using TOTP</strong> for accounts that do not support FIDO2 — it is still far better than SMS or no MFA.</li>
+</ol>
+
+<p>For step-by-step setup instructions, read our guide on <a href="/blog/how-to-set-up-two-factor-authentication-simple.html">how to set up two-factor authentication</a>.</p>
 
     <div style="text-align:center">
       <a href="/" class="bcta">Generate a Free Strong Password &#8594;</a>
@@ -234,6 +277,9 @@ footer .flink{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-
   </div>
 </main>
 
+<div style="max-width:800px;margin:24px auto;padding:16px 22px;background:#f0fdfa;border-radius:10px;border:1px solid #ccfbf1">
+<p style="margin:0;font-size:13px;color:#0f766e"><strong>🔒 Stay protected:</strong> Use <a href="https://www.kaspersky.com/?r=1&amp;icid=affiliate&amp;affid=1000001" target="_blank" rel="nofollow noopener">Kaspersky Premium</a> for antivirus protection and <a href="https://hidename.com/?ref=trusty" target="_blank" rel="nofollow noopener">Hide My Name VPN</a> for encrypted browsing.</p>
+</div>
 <section style="background:#F0FDFA;padding:32px 22px;text-align:center;margin-top:0"><div style="max-width:800px;margin:0 auto"><h3 style="margin:0 0 14px;font-size:15px;color:#0d9488;font-weight:700">More Password Security Tools</h3><div style="display:flex;justify-content:center;flex-wrap:wrap;gap:8px"><a href="https://securekeygenerator.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen</a><a href="https://titanpasswords.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2694;&#xfe0f; TitanPasswords</a><a href="https://bestpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f6e1;&#xfe0f; Best Password Generator</a><a href="https://freestrongpassword.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f510; Free Strong Password</a><a href="https://instantpasswordgenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x26a1; Instant Password</a><a href="https://ironvaultkeys.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f5dd;&#xfe0f; Iron Vault Keys</a><a href="https://randompasswordtool.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; Random Pwd Tool</a><a href="https://safepassbuilder.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f468;&#x200d;&#x1f469;&#x200d;&#x1f467;&#x200d;&#x1f466; Safe Pass Builder</a><a href="https://strongpassfactory.com/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x2699;&#xfe0f; StrongPassFactory</a><a href="https://securekeygenerator.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f511; SecureKeyGen.org</a><a href="https://trustypassword.org/" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:8px 16px;text-decoration:none;color:#1a202c;font-size:13px;font-weight:600">&#x1f4da; TrustyPassword.org</a></div></div></section>
 <footer>
   <div class="flink">
